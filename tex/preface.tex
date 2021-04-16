@@ -1,0 +1,15 @@
+\documentclass[../report.tex]{subfiles}
+
+\begin{document}
+
+\section*{Abstract}
+Music generation is a well established domain of machine learning, dating at least as far back as 1989. Since then, many sucessful implementations have made use of general sequence modelling techniques such as RNNs, LSTMs, and more recently, Transformers. Due to the high power and memory requirements of these models, there is an increasing amount of interest in biological neural networks. Despite their astounding capabilities, these networks are intrinsically power-efficient and sparsely connected, therefore they have potential to alleviate the aforementioned issues of artificial neural networks.
+
+The aim of this project was to investigate sequence modelling capabilities of spiking neural networks (SNNs), specifically in the context of monophonic melodies. We find that certain types of SNNs are able to approximate the accuracy of simple LSTM models, even under several biological constraints. On the other hand, training a spiking network on commodity hardware is an order of magnitude slower, when compared to the artificial counterpart. Furthermore, the SNN model suffers from similar issues as an LSTM, such as the lack of long-term structure in generated melodies.
+
+\section*{Acknowledgements}
+First and foremost, I would like to express sincere gratitude to my supervisor, Prof. Steve Furber, for his continued support over the last 6 months. It has been a pleasure and an honour to work with someone so knowledgeable and passionate about their field.
+
+Next, I am thankful to Adam Perrett and Dr. Andrew Gait from the APT research group, for guidance during the initial stages of the project. Their insights were very helpful in making key implementation decisions.
+
+\end{document}
