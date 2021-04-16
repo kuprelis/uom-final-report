@@ -1,10 +1,15 @@
 \documentclass[a4paper]{report}
+
 \usepackage[utf8]{inputenc}
 \usepackage{subfiles}
+\usepackage[backend=biber]{biblatex}
+
+\addbibresource{\subfix{references.bib}}
 
 \title{Music Generation using Spiking Neural Networks}
 \author{Simas Kuprelis \\ Supervised by Prof. Steve Furber}
 \date{April 2021}
+
 
 \begin{document}
 
@@ -13,5 +18,7 @@
 \tableofcontents
 
 \subfile{tex/01-introduction/chapter}
+
+\printbibliography
 
 \end{document}
