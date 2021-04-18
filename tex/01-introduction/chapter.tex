@@ -3,21 +3,98 @@
 \begin{document}
 \chapter{Introduction}
 
-Music generation is a well established domain of machine learning, dating at
-least as far back as 1989. Since then, many successful implementations have made
-use of general sequence modelling techniques such as RNNs, LSTMs, and more
-recently, Transformers. Due to the high power and memory requirements of these
-models, there is an increasing amount of interest in biological neural networks,
-which are intrinsically power-efficient and sparsely connected. Nevertheless,
-biological networks exhibit astounding cognitive capabilities, which makes them
-particularly relevant in the quest to alleviate the aforementioned issues of
-artificial neural networks.
+Music generation is a well established domain of machine learning, with the
+first RNN-based approach dating back to 1989 \cite{Todd1989}. Since then, many
+successful implementations have piggybacked on advancements in general sequence
+modelling techniques, such as Long Short-Term Memory \cite{Eck2002}, attention
+\cite{Waite2016}, and more recently, the Transformer \cite{Huang2018}. However,
+due to the high power and memory requirements of these model architectures,
+there is an increasing amount of interest in biological neural networks, which
+are intrinsically power efficient and sparsely connected, all the while
+exhibiting astounding cognitive capabilities. This makes them particularly
+relevant in the quest to reduce the resource requirements of artificial neural
+networks.
 
-\section{Motivation}
-Music is considered to be a cultural universal \cite{Mehreaax0868}.
+Nevertheless, there is good reason why biologically inspired spiking neural
+networks (SNNs) are still dominated by artificial neural networks (ANNs). SNNs
+carry out their computations via spikes, which are inherently
+non-differentiable. This complicates the use of backpropagation, which is the
+basis of many successful ANN optimisation techniques. In the case of networks
+with recurrent connections, like those found in the brain, it is common to use a
+variant known as backpropagation through time (BPTT). Approximating the spike
+gradient with a pseudo-derivative has been found to give good results
+\cite{Bellec2018}, but the problem is that BPTT requires storing previous states
+of each neuron, which is not biologically realistic \cite{Lillicrap2019}.
+
+Although promising solutions to the SNN training dilemma have emerged
+\cite{Bellec2020}, as we find in this project, it is difficult to achieve good
+performance on general purpose computers. One could argue that this comparison
+is somewhat unfair, as the past few years have seen significant effort to
+develop highly optimised machine learning frameworks geared towards ANNs.
+Indeed, SNN simulations can likewise be optimised through the use of specialised
+neuromorphic hardware, like our department's own SpiNNaker supercomputer
+\cite{Furber2014}. Still, utilising such platforms is often much more involved
+than an ML framework, so for the time being, efficient SNNs remain reserved for
+those willing to take a deep dive. Given that efficiency was not a concern in
+this project, all simulations were performed using GPU-accelerated SNN
+implementations on general purpose computers.
+
+Let's now turn back to our goal of music generation. If we are to use neural
+networks to generate melodies, we must ensure that the network has the
+capability to capture complex melodic patterns, or more generally, long-term
+sequential dependencies. This is exactly the promise of an LSTM, and that is why
+it has been so popular for the task of music generation. It has been shown that
+SNNs can acquire similar properties through the inclusion of neuronal adaptation
+\cite{Bellec2018}. Such spiking networks have been named LSNNs, due to their
+similarity to LSTMs. This similarity also gives hope to solve the task of
+sequence modelling, and so that is the hypothesis to be tested in this project.
 
 \section{Objectives}
+
+We approach melody generation as a many-to-many classification task, where the
+sequence of preceding notes is used to produce a probability distribution over
+all notes at each position of a melody. Such a distribution shall be learned
+from a large dataset of melodies. This results in the following set of key
+tasks:
+
+\begin{enumerate}
+  \item Acquiring training melodies.
+  \item Encoding melodies into spike-based inputs.
+  \item Training multiple LSNNs in search of optimal hyperparameters.
+  \item Training an LSTM configuration known to give good results.
+  \item Comparing the best performing LSNN with the LSTM.
+  \item Analysing the musicality of generated melodies.
+  \item Outlining potential implementation improvements.
+\end{enumerate}
+
+This project does not aim to improve the state of the art, therefore the success
+criterion is the mere completion of the above tasks.
+
+\section{Motivation}
+
+Music is considered to be a cultural universal \cite{Mehr2019}. That is to say,
+it is a common trait across all known human cultures. Moreover, music has been a
+part of the human condition throughout all of recorded history, so it is natural
+that as time goes on and technology develops, newfound knowledge is sooner or
+later applied in music-making. Just like the people of Ancient Greece used their
+early understanding of hydraulics to build the water organ, it was not long
+after the advent of electricity that we saw the invention of the Telharmonium,
+the first electronic organ. And now, as we witness the proliferation of machine
+learning applications, it only makes sense that we look into leveraging these
+intelligent machines to make music.
+
+Having attended music school prior to university, I am particularly keen on
+combining my hobby of music-making with my passion for computer science. When it
+was time to pick a final year project, it felt natural to explore the
+intersection of these two interests of mine. To put a further twist on it, I
+decided to take advantage of our department's active research into spiking
+neural networks. And so, this project came to be.
+
 \section{Pandemic impact}
-At the time of writing, the COVID-19 pandemic is ongoing. Unfortunately, it has had a negative impact on this project. Due to the introduction of a national lockdown during the first semester, it was necessary to adapt to working from home, which disrupted my focus and productivity.
+
+At the time of writing, the COVID-19 pandemic is ongoing. Unfortunately, it has
+had a negative impact on this project. Due to the introduction of a national
+lockdown during the first semester, it was necessary to adapt to working from
+home, which disrupted my focus and productivity.
 
 \end{document}

@@ -1,8 +1,13 @@
-\documentclass[a4paper]{report}
+\documentclass[a4paper,british]{report}
 
 \usepackage[utf8]{inputenc}
+
+\usepackage{babel}
+\usepackage[backend=biber,urldate=long]{biblatex}
+\usepackage{csquotes}
+\usepackage{parskip}
 \usepackage{subfiles}
-\usepackage[backend=biber]{biblatex}
+% TODO: bibliography hyperlinks
 
 \addbibresource{\subfix{references.bib}}
 
