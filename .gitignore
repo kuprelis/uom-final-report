@@ -1,5 +1,4 @@
 build/
-example/
 *.pdf
 *.synctex.gz
 *.bak
