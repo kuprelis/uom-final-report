@@ -63,7 +63,22 @@ complexity. \cite{Dieleman2020}
 
 \subsection{Spectrum}
 
+The same audio signal may also be represented in the frequency domain. By
+applying the Fourier transform to a time-domain signal, one can obtain the
+magnitude and phase of its frequency components at each point in time. Using
+overlapping windows of several time-domain samples, the size of the sequences'
+temporal dimension can be reduced considerably. However, in doing so, the amount
+of information to be processed at each time step is increased. This means that a frequency
+domain representation is not guaranteed to be more computationally efficient.
+\cite{Dieleman2020}
 
+Moreover, working in the frequency domain implies separating the
+magnitude and phase components of a signal. While the magnitude exhibits
+reasonable consistency, the phase is seemingly random. This is a non-trivial
+hurdle for generative models, because the relative phase of a signal's
+constituent frequencies encodes a great deal of perceptual details. Solutions
+exist, but for now, time domain audio seems to be better suited for generative
+models. \cite{Dieleman2020}
 
 \missingfigure{Audio spectrogram}
 
