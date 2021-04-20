@@ -7,23 +7,25 @@
 \usepackage{csquotes}
 \usepackage{parskip}
 \usepackage{subfiles}
-% TODO: bibliography hyperlinks
+\usepackage{todonotes}
 
 \addbibresource{\subfix{references.bib}}
 
 \title{Music Generation using Spiking Neural Networks}
 \author{Simas Kuprelis \\ Supervised by Prof. Steve Furber}
 \date{April 2021}
-% TODO: make fancy title page
 
 
 \begin{document}
 
 \maketitle
+\todo[inline]{Make title page pretty}
 \subfile{tex/preface}
 \tableofcontents
 \subfile{tex/01-introduction/chapter}
 \subfile{tex/02-background/chapter}
 \printbibliography
+\todo[inline]{Ensure bibliography links work}
+\listoftodos
 
 \end{document}
