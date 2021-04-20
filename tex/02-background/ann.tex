@@ -1,0 +1,44 @@
+\documentclass[../../report.tex]{subfiles}
+\begin{document}
+\section{Artificial neural networks}
+
+The past decade has seen rapid advancement in a class of techniques commonly
+known as \emph{deep learning}. The core idea is simple -- stacking several
+layers of simple, but nonlinear modules creates a computational network that, as
+a whole, can approximate very complex functions. Through successive optimisation
+rounds of the layered modules' parameters, the network can be nudged towards a
+specific goal. Ideally, after many iterations of optimisation, the network
+converges to that goal.
+
+Previously, machine learning tasks required a lot of manual work and specialised
+knowledge in order to transform task-specific data into a representation that
+made the task tractable. The key innovation of deep learning is automated
+feature extraction, most usefully from complex, high dimensional input data,
+e.g. images. In classification tasks, it is particularly desirable that the
+feature extractor transforms the intractable input space into a space where
+inputs belonging to different classes are \emph{linearly separable}.
+\cite{LeCun2015}
+
+\missingfigure{Input space transformation}
+
+\subsection{Feedforward networks}
+
+\missingfigure{Feedforward network}
+
+\subsubsection{Backpropagation}
+
+\missingfigure{Backpropagation}
+
+\subsection{Recurrent networks}
+
+\missingfigure{RNN cell}
+
+\subsubsection{Backpropagation through time}
+
+\missingfigure{Unrolled RNN}
+
+\subsubsection{Long Short-Term Memory}
+
+\missingfigure{LSTM cell}
+
+\end{document}
