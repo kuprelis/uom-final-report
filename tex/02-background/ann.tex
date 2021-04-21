@@ -19,26 +19,61 @@ feature extractor transforms the intractable input space into a space where
 inputs belonging to different classes are \emph{linearly separable}.
 \cite{LeCun2015}
 
-\missingfigure{Input space transformation}
+\missingfigure{Transforming a nonlinear boundary to a linearly separable space
+\cite{Olah2014}}
 
 \subsection{Feedforward networks}
+
+As introduced above, these powerful feature extractors consist of several
+layers. First, there is the input layer, which is filled with input data prior
+to the computation. This data then flows through zero or more hidden layers,
+before finally finding its way to the output layer. The \emph{activation} of
+each unit in every non-input layer is given by a weighted sum over all
+activations of the previous layer. This sum is finally taken through a nonlinear
+function, e.g. ReLU\footnote{Rectified Linear Unit}, which is simply $f(x) =
+max(0, x)$.
 
 \missingfigure{Feedforward network}
 
 \subsubsection{Backpropagation}
+To unlock the full potential of these networks, it is imperative to optimise the
+weights determining the activation of individual units. To do so, a \emph{loss
+function} is required. Figuratively, this is a measure of distance between the
+network's output and the ground truth value. Clearly, this distance should be
+minimised. This is achieved with the help of calculus, namely \emph{partial
+derivatives} and the \emph{chain rule}. Loosely speaking, a partial derivative
+quantifies a given variable's influence towards a multivariate function; the
+chain rule allows calculating such partial derivatives even when the variable in
+question is hidden behind several layers of function composition. Crucially,
+this forms the foundation for backpropagation, a procedure that computes the
+influence towards the loss function for every network parameter \emph{in
+isolation}.
 
-\missingfigure{Backpropagation}
+\subsubsection{Gradient descent}
+
+Once calculated, the error contributions of individual parameters can be
+combined into a \emph{gradient}, which in a sense describes the direction of
+steepest increase\footnotemark for the loss function. Of course, as this
+function is subject to minimisation, the relevant step is in the direction
+exactly opposite of the gradient. This simple idea is known as gradient descent,
+and it represents the `nudge' introduced at the beginning of this section.
+
+\footnotetext{A good visual analogy is that of hill-climbing, although this
+quickly breaks down, as neural network gradients are usually in high-dimensional
+space.}
+
+\missingfigure{Backpropagation \cite{Olah2015Backprop}}
 
 \subsection{Recurrent networks}
 
-\missingfigure{RNN cell}
+\missingfigure{RNN cell \cite{Olah2015LSTM}}
 
 \subsubsection{Backpropagation through time}
 
-\missingfigure{Unrolled RNN}
+\missingfigure{Unrolled RNN \cite{Olah2015LSTM}}
 
 \subsubsection{Long Short-Term Memory}
 
-\missingfigure{LSTM cell}
+\missingfigure{LSTM cell \cite{Olah2015LSTM}}
 
 \end{document}
