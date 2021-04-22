@@ -1,0 +1,51 @@
+\documentclass[../../report.tex]{subfiles}
+\begin{document}
+\section{Literature Review}
+
+Music generation is a well established domain of machine learning, with the
+first RNN-based approach dating back to 1989 \cite{Todd1989}. Since then, many
+successful implementations have piggybacked on advancements in general sequence
+modelling techniques, such as Long Short-Term Memory \cite{Eck2002}, attention
+\cite{Waite2016}, and more recently, the Transformer \cite{Huang2018}. However,
+due to the high power and memory requirements of these model architectures,
+there is an increasing amount of interest in biological neural networks, which
+are intrinsically power efficient and sparsely connected, all the while
+exhibiting astounding cognitive capabilities. This makes them particularly
+relevant in the quest to reduce the resource requirements of artificial neural
+networks.
+
+Nevertheless, there is good reason why biologically inspired spiking neural
+networks (SNNs) are still dominated by artificial neural networks (ANNs). SNNs
+carry out their computations via spikes, which are inherently
+non-differentiable. This complicates the use of backpropagation, which is the
+basis of many successful ANN optimisation techniques. In the case of networks
+with recurrent connections, like those found in the brain, it is common to use a
+variant known as backpropagation through time (BPTT). Approximating the spike
+gradient with a pseudo-derivative has been found to give good results
+\cite{Bellec2018LSNN}, but the problem is that BPTT requires storing previous
+states of each neuron, which is not biologically realistic \cite{Lillicrap2019}.
+
+Although promising solutions to the SNN training dilemma have emerged
+\cite{Bellec2020}, as we find in this project, it is difficult to achieve good
+performance on general purpose computers. One could argue that this comparison
+is somewhat unfair, as the past few years have seen significant effort to
+develop highly optimised machine learning frameworks geared towards ANNs.
+Indeed, SNN simulations can likewise be optimised through the use of specialised
+neuromorphic hardware, like our department's own SpiNNaker supercomputer
+\cite{Furber2014}. Still, utilising such platforms is often much more involved
+than an ML framework, so for the time being, efficient SNNs remain reserved for
+those willing to take a deep dive. Given that efficiency was not a concern in
+this project, all simulations were performed using GPU-accelerated SNN
+implementations on general purpose computers.
+
+Let's now turn back to our goal of music generation. If we are to use neural
+networks to generate melodies, we must ensure that the network has the
+capability to capture complex melodic patterns, or more generally, long-term
+sequential dependencies. This is exactly the promise of an LSTM, and that is why
+it has been so popular for the task of music generation. It has been shown that
+SNNs can acquire similar properties through the inclusion of neuronal adaptation
+\cite{Bellec2018LSNN}. Such spiking networks have been named LSNNs, due to their
+similarity to LSTMs. This similarity also gives hope to solve the task of
+sequence modelling, and so that is the hypothesis to be tested in this project.
+
+\end{document}
