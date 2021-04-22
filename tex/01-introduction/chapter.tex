@@ -22,8 +22,8 @@ basis of many successful ANN optimisation techniques. In the case of networks
 with recurrent connections, like those found in the brain, it is common to use a
 variant known as backpropagation through time (BPTT). Approximating the spike
 gradient with a pseudo-derivative has been found to give good results
-\cite{Bellec2018}, but the problem is that BPTT requires storing previous states
-of each neuron, which is not biologically realistic \cite{Lillicrap2019}.
+\cite{Bellec2018LSNN}, but the problem is that BPTT requires storing previous
+states of each neuron, which is not biologically realistic \cite{Lillicrap2019}.
 
 Although promising solutions to the SNN training dilemma have emerged
 \cite{Bellec2020}, as we find in this project, it is difficult to achieve good
@@ -44,7 +44,7 @@ capability to capture complex melodic patterns, or more generally, long-term
 sequential dependencies. This is exactly the promise of an LSTM, and that is why
 it has been so popular for the task of music generation. It has been shown that
 SNNs can acquire similar properties through the inclusion of neuronal adaptation
-\cite{Bellec2018}. Such spiking networks have been named LSNNs, due to their
+\cite{Bellec2018LSNN}. Such spiking networks have been named LSNNs, due to their
 similarity to LSTMs. This similarity also gives hope to solve the task of
 sequence modelling, and so that is the hypothesis to be tested in this project.
 
