@@ -16,24 +16,41 @@ made the task tractable. The key innovation of deep learning is automated
 feature extraction, most usefully from complex, high dimensional input data,
 e.g. images. In classification tasks, it is particularly desirable that the
 feature extractor transforms the intractable input space into a space where
-inputs belonging to different classes are \emph{linearly separable}.
-\cite{LeCun2015}
+inputs belonging to different classes are \emph{linearly separable} (figure
+\ref{fig:representation-learning}). \cite{LeCun2015}
 
-\missingfigure{Transforming a nonlinear boundary to a linearly separable space
-\cite{Olah2014}}
+\begin{figure}
+  \centering
+  \begin{subfigure}[b]{0.49\textwidth}
+    \includegraphics[width=\textwidth]{boundary-nonlinear}
+    \caption{Input space}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.49\textwidth}
+    \includegraphics[width=\textwidth]{boundary-linear}
+    \caption{Learned representation}
+  \end{subfigure}
+  \caption{The network learns to separate nonlinear data \cite{Olah2014}}
+  \label{fig:representation-learning}
+\end{figure}
 
 \subsection{Feedforward Networks}
 
 As introduced above, these powerful feature extractors consist of several
 layers. First, there is the input layer, which is filled with input data prior
 to the computation. This data then flows through zero or more hidden layers,
-before finally finding its way to the output layer. The \emph{activation} of
-each unit in every non-input layer is given by a weighted sum over all
-activations of the previous layer. This sum is finally taken through a nonlinear
-function, e.g. ReLU\footnote{Rectified Linear Unit}, which is simply $f(x) =
-max(0, x)$.
+before finally finding its way to the output layer (figure
+\ref{fig:feedforward}). The \emph{activation} of each unit in every non-input
+layer is given by a weighted sum over all activations of the previous layer.
+This sum is finally taken through a nonlinear function, e.g.
+ReLU\footnote{Rectified Linear Unit}, which is simply $f(x) = max(0, x)$.
 
-\missingfigure{Feedforward network}
+\begin{figure}
+  \centering
+  \includegraphics[width=0.75\textwidth]{feedforward}
+  \caption{Feedforward network}
+  \label{fig:feedforward}
+\end{figure}
 
 \subsubsection{Backpropagation}
 To unlock the full potential of these networks, it is imperative to optimise the
@@ -47,7 +64,7 @@ chain rule allows calculating such partial derivatives even when the variable in
 question is hidden behind several layers of function composition. Crucially,
 this forms the foundation for backpropagation, a procedure that computes the
 influence towards the loss function for every network parameter \emph{in
-isolation}.
+isolation} (figure \ref{fig:backpropagation}).
 
 \subsubsection{Gradient Descent}
 Once calculated, the error contributions of individual parameters can be
@@ -61,7 +78,12 @@ and it represents the `nudge' introduced at the beginning of this section.
 quickly breaks down, as neural network gradients are usually in high-dimensional
 space.}
 
-\missingfigure{Backpropagation \cite{Olah2015Backprop}}
+\begin{figure}
+  \centering
+  \includegraphics[width=0.75\textwidth]{backpropagation}
+  \caption{Backpropagation in a computational graph \cite{Olah2015Backprop}}
+  \label{fig:backpropagation}
+\end{figure}
 
 \subsection{Recurrent Networks}
 
@@ -72,25 +94,29 @@ problem for a generative music model, which should be able to process both short
 and long melodies. Recurrent neural networks (RNNs) account for this deficiency
 by processing sequences one step at a time, while maintaining an \emph{internal
 state} that encodes information about previous inputs. At each step, the
-previous state is used in combination with the input to produce an output and
-the next state. This is quite different from a feedforward network, whose output
-depends purely on the current input.
-
-\missingfigure{RNN cell \cite{Olah2015LSTM}}
+previous state is used in combination with the input to produce the next state
+(figure \ref{fig:rnn-unrolled}). This is quite different from a feedforward
+network, whose output depends purely on the current input.
 
 \subsubsection{Backpropagation Through Time}
 The optimisation procedure for recurrent networks is similar to that of
 feedforward networks. If we unfold the RNN across time steps, the result is
-essentially a feedforward network with many\footnotemark{} hidden layers. Only
-this time, all layers share the same parameters, and the input and output layers
-are `spread' across the hidden layers, i.e. time. Performing backpropagation on
-this unfolded version of the RNN is known as backpropagation through time, or
-BPTT.
+essentially a feedforward network with many\footnotemark{} hidden layers (figure
+\ref{fig:rnn-unrolled}). Only this time, all layers share the same parameters,
+and the input and output layers are `spread' across the hidden layers, i.e.
+time. Performing backpropagation on this unfolded version of the RNN is known as
+backpropagation through time, or BPTT.
 
 \footnotetext{In fact, the number of layers is equal to the length of the input
 sequence.}
 
-\missingfigure{Unrolled RNN \cite{Olah2015LSTM}}
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{rnn-unrolled}
+  \caption{Input $x_t$ is used to produce new states $h_t$. The RNN cell (left)
+  is unrolled across time for training (right). \cite{Olah2015LSTM}}
+  \label{fig:rnn-unrolled}
+\end{figure}
 
 \subsubsection{Long Short-Term Memory}
 The idea of using RNNs to model long-term temporal dependencies is appealing,
@@ -99,10 +125,15 @@ for RNNs to remember relevant past inputs for a long time. Instead it is common
 to use Long Short-Term Memory (LSTM) networks \cite{Hochreiter1997}. Their key
 innovation is explicit modelling of forgetting and accumulation of memory.
 Whereas in RNNs the state is transformed by a single feedforward layer, the LSTM
-employs four -- each with a specific purpose. This makes it very easy for LSTMs
-to retain parts of the previous state, which in turn captures long-term
-dependencies.
+employs four -- each with a specific purpose (figure \ref{fig:lstm}). This makes
+it very easy for LSTMs to retain parts of the previous state, which in turn
+captures long-term dependencies.
 
-\missingfigure{LSTM cell \cite{Olah2015LSTM}}
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{lstm}
+  \caption{An LSTM cell contains multiple gates for state manipulation \cite{Olah2015LSTM}}
+  \label{fig:lstm}
+\end{figure}
 
 \end{document}
