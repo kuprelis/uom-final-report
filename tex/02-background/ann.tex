@@ -1,6 +1,6 @@
 \documentclass[../../report.tex]{subfiles}
 \begin{document}
-\section{Artificial neural networks}
+\section{Artificial Neural Networks}
 
 The past decade has seen rapid advancement in a class of techniques commonly
 known as \emph{deep learning}. The core idea is simple -- stacking several
@@ -22,7 +22,7 @@ inputs belonging to different classes are \emph{linearly separable}.
 \missingfigure{Transforming a nonlinear boundary to a linearly separable space
 \cite{Olah2014}}
 
-\subsection{Feedforward networks}
+\subsection{Feedforward Networks}
 
 As introduced above, these powerful feature extractors consist of several
 layers. First, there is the input layer, which is filled with input data prior
@@ -49,7 +49,7 @@ this forms the foundation for backpropagation, a procedure that computes the
 influence towards the loss function for every network parameter \emph{in
 isolation}.
 
-\subsubsection{Gradient descent}
+\subsubsection{Gradient Descent}
 Once calculated, the error contributions of individual parameters can be
 combined into a \emph{gradient}, which in a sense describes the direction of
 steepest increase\footnotemark{} for the loss function. Of course, as this
@@ -63,7 +63,7 @@ space.}
 
 \missingfigure{Backpropagation \cite{Olah2015Backprop}}
 
-\subsection{Recurrent networks}
+\subsection{Recurrent Networks}
 
 Although feedforward networks are undoubtedly powerful, they are not very well
 suited for processing sequential data. This is partially because they require
@@ -78,7 +78,7 @@ depends purely on the current input.
 
 \missingfigure{RNN cell \cite{Olah2015LSTM}}
 
-\subsubsection{Backpropagation through time}
+\subsubsection{Backpropagation Through Time}
 The optimisation procedure for recurrent networks is similar to that of
 feedforward networks. If we unfold the RNN across time steps, the result is
 essentially a feedforward network with many\footnotemark{} hidden layers. Only
