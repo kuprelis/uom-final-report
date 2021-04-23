@@ -28,6 +28,8 @@ potential decays over time back to a resting level. Moreover, following a spike,
 the neuron enters a short \emph{refractory period}, during which it cannot spike
 again, regardless of incoming stimulus.
 
+\missingfigure{Neuron model \cite{Lobo2020}}
+
 \subsubsection{Neuronal adaptation}
 The standard LIF model omits an important property observed in experimental
 evidence -- spike frequency adaptation. When stimulated with a constant input
@@ -36,8 +38,6 @@ of spikes. This means that effectively, their firing threshold increases. It has
 been shown that an SNN with such adaptive LIF (ALIF) neurons gains memory
 capabilities similar to that of an LSTM \cite{Bellec2018LSNN}, and therefore
 such a configuration is known by the portmanteau LSNN.
-
-\missingfigure{Spike frequency adaptation}
 
 \subsection{Plasticity}
 
@@ -59,8 +59,25 @@ long as the discontinuous spike function is replaced by a differentiable
 alternative \cite{Bellec2018LSNN}.
 
 \subsection{Biological plausibility}
-% connectivity and rewiring
-% eligibility traces
-% rate, voltage regularization
+
+Traditional ANNs have the freedom to diverge from biological realism, and to do
+whatever gives good results. SNNs have not yet outperformed ANNs, but it is
+clear that human brains are still superior at many tasks. This seems to suggest
+that going forward, there is much to be learned from biology.
+
+Indeed, a recently published SNN training algorithm, \emph{e-prop}, draws
+inspiration from experimental neuroscience. Instead of propagating gradients
+back in time like BPTT, e-prop accumulates local traces of potentially
+correlated firing activity into the future. These traces are later combined with
+network error signals\footnotemark{} to perform synaptic updates.
+\cite{Bellec2020}
+
+\footnotetext{In this sense, the role of the loss function becomes similar to
+that of biological top-down signals, such as dopamine.}
+
+Moreover, it is possible to augment the loss function with penalties that
+encourage the network to exhibit biologically realistic behaviour. For example,
+the inclusion of an averaged firing frequency target term prevents physically
+impossible spike rates \cite{Bellec2018LSNN}.
 
 \end{document}
