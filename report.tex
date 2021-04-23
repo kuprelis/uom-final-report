@@ -5,12 +5,17 @@
 \usepackage{babel}
 \usepackage[backend=biber,urldate=long]{biblatex}
 \usepackage{csquotes}
+\usepackage{caption}
 \usepackage[perpage]{footmisc}
+\usepackage{graphicx}
+\usepackage[hidelinks]{hyperref}
 \usepackage{parskip}
 \usepackage{siunitx}
+\usepackage{subcaption}
 \usepackage{subfiles}
 \usepackage{todonotes}
 
+\graphicspath{{graphics/}}
 \addbibresource{\subfix{references.bib}}
 \emergencystretch=1em
 
@@ -28,7 +33,6 @@
 \subfile{tex/01-introduction/chapter}
 \subfile{tex/02-background/chapter}
 \printbibliography
-\todo[inline]{Ensure bibliography links work}
 \listoftodos
 
 \end{document}

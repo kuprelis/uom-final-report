@@ -34,20 +34,27 @@ message consists of a status byte, generally followed by one or two data bytes.
 There are many types of messages, but arguably the most important ones are
 \emph{note-on} and \emph{note-off} events -- they represent the activation and
 release of individual notes, effectively encoding a musical performance. Most
-importantly, this sequence of events can be saved as a Standard MIDI File (SMF).
-Due to its popularity and portability, this format is perfect for a sequence
-modelling application. \cite{MIDI2015Messages, MIDI2015Files}
+importantly, this sequence of events (figure \ref{fig:piano-roll}) can be saved
+as a Standard MIDI File (SMF). Due to its popularity and portability, this
+format is perfect for a sequence modelling application. \cite{MIDI2015Messages,
+MIDI2015Files}
 
-\missingfigure{MIDI piano roll}
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{piano-roll}
+  \caption{MIDI events in a digital audio workstation}
+  \label{fig:piano-roll}
+\end{figure}
 
 \subsection{Waveform}
 
 At the most fundamental level, music can be interpreted as an audio signal in
 the time domain. Using pulse-code modulation (PCM), the otherwise continuous
-signal is discretised in dimensions of both time and amplitude. This produces a
-sequence of samples, which can then be fed into a neural network. The benefit of
-this approach is that it inherently captures intricate acoustic features, which
-may be lost in symbolic representations. \cite{Dieleman2020}
+signal is discretised in dimensions of both time and amplitude (figure
+\ref{fig:pcm}). This produces a sequence of samples, which can then be fed into
+a neural network. The benefit of this approach is that it inherently captures
+intricate acoustic features, which may be lost in symbolic representations.
+\cite{Dieleman2020}
 
 Unfortunately, PCM produces immensely long sequences. Human hearing is limited
 to frequencies below \num{20} kHz, and by the Nyquist--Shannon sampling theorem
@@ -59,7 +66,26 @@ hand quickly, therefore many models have opted for a reduced sample rate of
 \num{16} or \num{24} kHz, striking a balance between fidelity and computational
 complexity. \cite{Dieleman2020}
 
-\missingfigure{Audio waveform visualisation}
+\begin{figure}
+  \centering
+  \begin{subfigure}[b]{0.24\textwidth}
+    \includegraphics[width=\textwidth]{wave-1000ms}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.24\textwidth}
+    \includegraphics[width=\textwidth]{wave-100ms}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.24\textwidth}
+    \includegraphics[width=\textwidth]{wave-10ms}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.24\textwidth}
+    \includegraphics[width=\textwidth]{wave-1ms}
+  \end{subfigure}
+  \caption{PCM-encoded audio waveform \cite{Oord2016}}
+  \label{fig:pcm}
+\end{figure}
 
 \subsection{Spectrum}
 
@@ -72,16 +98,27 @@ of information to be processed at each time step is increased. This means that a
 frequency domain representation is not guaranteed to be more computationally
 efficient. \cite{Dieleman2020}
 
-Moreover, working in the frequency domain implies separating the
-magnitude and phase components of a signal. While the magnitude exhibits
-reasonable consistency, the phase is seemingly random. This is a non-trivial
-hurdle for generative models, because the relative phase of a signal's
-constituent frequencies encodes a great deal of perceptual details. Solutions
-exist, but for now, time domain audio seems to be better suited for generative
-models. \cite{Dieleman2020}
+Moreover, working in the frequency domain implies separating the magnitude and
+phase components of a signal. While the magnitude exhibits reasonable
+consistency, the phase is seemingly random (figure \ref{fig:spectrogram}). This
+is a non-trivial hurdle for generative models, because the relative phase of a
+signal's constituent frequencies encodes a great deal of perceptual details.
+Solutions exist, but for now, time domain audio seems to be better suited for
+generative models. \cite{Dieleman2020}
 
-\todo{Cochlea remark}
-
-\missingfigure{Audio spectrogram}
+\begin{figure}
+  \centering
+  \begin{subfigure}[b]{0.49\textwidth}
+    \includegraphics[width=\textwidth]{spectrogram-magnitude}
+    \caption{Magnitude}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.49\textwidth}
+    \includegraphics[width=\textwidth]{spectrogram-phase}
+    \caption{Phase}
+  \end{subfigure}
+  \caption{Spectrogram of a piano recording \cite{Dieleman2020}}
+  \label{fig:spectrogram}
+\end{figure}
 
 \end{document}
