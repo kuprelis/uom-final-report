@@ -23,12 +23,18 @@ For the purposes of this project, neurons shall be implemented according to the
 prominent \emph{leaky integrate-and-fire} (LIF) model. LIF neurons are shapeless
 entities that accumulate incoming weighted \emph{spikes} in the form of a
 \emph{membrane potential}. If this potential exceeds a threshold, the neuron
-emits a unitary spike itself, and the potential resets. Otherwise, the membrane
-potential decays over time back to a resting level. Moreover, following a spike,
-the neuron enters a short \emph{refractory period}, during which it cannot spike
-again, regardless of incoming stimulus.
+emits a unitary spike itself, and the potential resets (figure
+\ref{fig:neuron}). Otherwise, the membrane potential decays over time back to a
+resting level. Moreover, following a spike, the neuron enters a short
+\emph{refractory period}, during which it cannot spike again, regardless of
+incoming stimulus.
 
-\missingfigure{Neuron model \cite{Lobo2020}}
+\begin{figure}
+  \centering
+  \includegraphics[width=0.75\textwidth]{neuron}
+  \caption{Computational model of a neuron \cite{Lobo2020}}
+  \label{fig:neuron}
+\end{figure}
 
 \subsubsection{Neuronal Adaptation}
 The standard LIF model omits an important property observed in experimental
