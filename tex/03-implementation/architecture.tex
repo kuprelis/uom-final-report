@@ -2,6 +2,108 @@
 \begin{document}
 \section{Model Architecture}
 
+TensorFlow is based on the principle of deferred execution\footnotemark{}.
+Operations on variables are not evaluated immediately -- instead, program
+statements construct nodes in a computational graph. Once the graph is ready,
+the program can ask to evaluate specific variables. Deferred execution enables
+TensorFlow to boost performance by parallelising independent parts of the graph,
+and even by ignoring parts that do not contribute to the current computation.
 
+\footnotetext{TensorFlow 2 introduces eager execution, removing the requirement
+to separate graph definition and graph execution. However, for compatibility
+reasons this project uses TensorFlow 1.}
+
+\missingfigure{Deferred execution code example}
+
+\subsection{LSNN Cell}
+
+Standard neural network components (e.g. LSTM) are bundled with TensorFlow.
+However, to use something as esoteric as an LSNN, customisation is required.
+Implementing custom recurrent networks is relatively simple -- it is sufficient
+to define the computations to be performed in a single step of the RNN cell, and
+a few trivial interface methods.
+
+\subsubsection{Constructor Arguments}
+
+The LSNN cell has many hyperparameters. Their optimal values depend on the task,
+so they have been made configurable via the constructor.
+
+\todo[inline]{Turn this into a table}
+\begin{itemize}
+  \item num neurons -- the number of neurons modeled by this cell
+  \item dt -- the physical time step represented by a single iteration
+  \item frac alif -- fraction of neurons with adaptive firing thresholds
+  \item num refractory dt -- length of the refractory period
+  \item spike threshold -- base firing threshold
+  \item potential decay -- membrane potential time constant \todo{define}
+  \item adaptation decay -- adaptive threshold time constant \todo{define}
+  \item adaptation magnitude -- adaptive threshold scaling factor
+  \item dampening factor -- psuedo-derivative scaling factor \todo{training link}
+\end{itemize}
+
+\subsubsection{State}
+Most RNN cells share the notion of \emph{units}. The number of units determines
+the size of the RNN state, which directly affects the network's ability to
+learn. An LSTM with 10 units represents its state as a single 10-dimensional
+vector. The state of a neuron is described by several variables, therefore an
+LSNN with 10 neurons will produce states that are \emph{tuples} of
+10-dimensional vectors. These vectors are as follows:
+
+\todo[inline]{Turn this into a table}
+\begin{itemize}
+  \item potentials -- membrane potential of each neuron
+  \item adaptations -- magnitude of threshold adaptation for each neuron
+  \item spikes -- binary vector indicating neurons that spiked in the previous step
+  \item refractoriness -- refractory period counters
+  \item num\_spikes -- running total of spikes for each neuron
+  \item num\_steps -- running total of steps taken by this cell (scalar)
+\end{itemize}
+
+\subsubsection{Input \& Output}
+
+The LSNN cell expects to receive binary input spike vectors of arbitrary but
+constant size. The output is a binary vector of spikes from internal LSNN
+neurons.
+
+\subsubsection{Step}
+
+Generally, the step function of an RNN cell should take the input and state as
+arguments, and it should return the output and next state. The LSNN fulfils this
+contract as outlined below:
+
+\todo[inline]{Consider turning this into pseudocode}
+\todo[inline]{Consider adding equations}
+\begin{enumerate}
+
+  \item Input spikes and internal spikes are multiplied with corresponding
+  synaptic weight matrices; the results are added to membrane potentials of
+  internal neurons.
+
+  \item Membrane potentials and adaptive thresholds are used to determine which
+  neurons will spike at this time step.
+
+  \item Spikes are blocked for neurons currently in the refractory period.
+
+  \item Decay factor is applied to membrane potentials.
+
+  \item Decay factor is applied to adaptive thresholds.
+
+  \item Nonzero refractory counters are decremented.
+
+  \item Membrane potentials are reset for neurons spiking in this step.
+
+  \item Adaptive thresholds are increased for ALIF neurons that spiked in this
+  step.
+
+  \item Refractory counters are initialised for neurons spiking in this step.
+
+  \item New state vectors are packed into a tuple and returned along with
+  internal spikes.
+
+\end{enumerate}
+
+\subsection{Smoothing the Outputs}
+
+\subsection{Spiking the Inputs}
 
 \end{document}
