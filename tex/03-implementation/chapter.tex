@@ -2,6 +2,20 @@
 \begin{document}
 \chapter{Implementation}
 
+Having laid out all the prerequisite concepts in the previous chapter, let's now
+recap what comprises the scope of this project. The model shall build on Basic
+RNN, an LSTM-based model from Magenta. The aim is to create a variant that
+instead uses an LSNN. After acquiring and preprocessing MIDI files, the
+resulting dataset shall be used to train and evaluate equivalent configurations
+of both models. Finally, it will be possible to generate melodies and to assess
+their musicality.
 
+\subsubsection{Software}
+The code for this project is written in Python 3. It uses TensorFlow, an
+open-source machine learning library. This was an obvious choice, as TensorFlow
+is used by both Magenta and several relevant SNN research papers
+\cite{Bellec2018LSNN, Bellec2020}.
+
+\subfile{architecture}
 
 \end{document}
