@@ -2,29 +2,20 @@
 \begin{document}
 \section{Model Architecture}
 
-TensorFlow is based on the principle of deferred execution\footnotemark{}.
-Operations on variables are not evaluated immediately -- instead, program
-statements construct nodes in a computational graph. Once the graph is ready,
-the program can ask to evaluate specific variables. Deferred execution enables
-TensorFlow to boost performance by parallelising independent parts of the graph,
-and even by ignoring parts that do not contribute to the current computation.
+Understanding and implementing the LSNN was one of the major challenges in this
+project. It was very helpful to analyse the experimental code published by
+researchers at TU Graz \cite{Bellec2018LSNN, Bellec2020}. Still, large parts of
+their implementation had to be rewritten in order to make the LSNN interoperable
+with Magenta, and to improve code readability.
 
-\footnotetext{TensorFlow 2 introduces eager execution, removing the requirement
-to separate graph definition and graph execution. However, for compatibility
-reasons this project uses TensorFlow 1.}
+\subsection{LSNN cell}
 
-\missingfigure{Deferred execution code example}
+TensorFlow comes bundled with many standard neural network components, e.g.
+LSTM. Of course, esoteric modules such as the LSNN must be implemented manually.
+In TensorFlow, custom recurrent networks are defined by extending the abstract
+\texttt{RNNCell} class, and our LSNN is no exception.
 
-\subsection{LSNN Cell}
-
-Standard neural network components (e.g. LSTM) are bundled with TensorFlow.
-However, to use something as esoteric as an LSNN, customisation is required.
-Implementing custom recurrent networks is relatively simple -- it is sufficient
-to define the computations to be performed in a single step of the RNN cell, and
-a few trivial interface methods.
-
-\subsubsection{Constructor Arguments}
-
+\subsubsection{Constructor arguments}
 The LSNN cell has many hyperparameters. Their optimal values depend on the task,
 so they have been made configurable via the constructor.
 
@@ -42,34 +33,29 @@ so they have been made configurable via the constructor.
 \end{itemize}
 
 \subsubsection{State}
-Most RNN cells share the notion of \emph{units}. The number of units determines
-the size of the RNN state, which directly affects the network's ability to
-learn. An LSTM with 10 units represents its state as a single 10-dimensional
-vector. The state of a neuron is described by several variables, therefore an
-LSNN with 10 neurons will produce states that are \emph{tuples} of
-10-dimensional vectors. These vectors are as follows:
+The state of an LSNN cell is a tuple of six tensors, as described below:
 
 \todo[inline]{Turn this into a table}
 \begin{itemize}
   \item potentials -- membrane potential of each neuron
   \item adaptations -- magnitude of threshold adaptation for each neuron
   \item spikes -- binary vector indicating neurons that spiked in the previous step
-  \item refractoriness -- refractory period counters
+  \item refractoriness -- refractory period counter for each neuron
   \item num\_spikes -- running total of spikes for each neuron
   \item num\_steps -- running total of steps taken by this cell (scalar)
 \end{itemize}
 
-\subsubsection{Input \& Output}
+\subsubsection{Input \& output}
 
 The LSNN cell expects to receive binary input spike vectors of arbitrary but
 constant size. The output is a binary vector of spikes from internal LSNN
 neurons.
 
-\subsubsection{Step}
+\subsubsection{Operation}
 
-Generally, the step function of an RNN cell should take the input and state as
-arguments, and it should return the output and next state. The LSNN fulfils this
-contract as outlined below:
+Subclasses of \texttt{RNNCell} must implement the \texttt{call} method. It
+should take the input and state as arguments, and it should return the output
+and next state. The LSNN cell achieves this as follows:
 
 \todo[inline]{Consider turning this into pseudocode}
 \todo[inline]{Consider adding equations}
@@ -102,8 +88,10 @@ contract as outlined below:
 
 \end{enumerate}
 
-\subsection{Smoothing the Outputs}
+\subsection{Smoothing the outputs}
 
-\subsection{Spiking the Inputs}
+\subsection{Spiking the inputs}
+
+\subsection{Putting it all together}
 
 \end{document}
