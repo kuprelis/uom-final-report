@@ -12,6 +12,7 @@
 \usepackage{graphicx}
 \usepackage[hidelinks]{hyperref}
 \usepackage{parskip}
+\usepackage{pdfpages}
 \usepackage{siunitx}
 \usepackage{subcaption}
 \usepackage{subfiles}
@@ -21,15 +22,9 @@
 \addbibresource{\subfix{references.bib}}
 \emergencystretch=1em
 
-\title{Melody Generation with Spiking Neural Networks}
-\author{Simas Kuprelis \\ Supervised by Prof. Steve Furber}
-\date{April 2021}
-
-
 \begin{document}
 
-\maketitle
-\todo[inline]{Make title page pretty}
+\includepdf{graphics/title}
 \subfile{tex/preface}
 \tableofcontents
 \subfile{tex/01-introduction/chapter}

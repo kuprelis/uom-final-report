@@ -1,4 +1,5 @@
 build/
-*.pdf
+/*.pdf
+/tex/**/*.pdf
 *.synctex.gz
 *.bak
