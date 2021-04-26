@@ -21,19 +21,23 @@ so they have been made configurable via the constructor.
 
 \todo[inline]{Turn this into a table}
 \begin{itemize}
-  \item num neurons -- the number of neurons modeled by this cell
+  \item num neurons -- the number of neurons modelled by this cell
   \item dt -- the physical time step represented by a single iteration
   \item frac alif -- fraction of neurons with adaptive firing thresholds
   \item num refractory dt -- length of the refractory period
   \item spike threshold -- base firing threshold
-  \item potential decay -- membrane potential time constant \todo{define}
-  \item adaptation decay -- adaptive threshold time constant \todo{define}
+  \item potential decay -- membrane potential time constant\footnotemark{}
+  \item adaptation decay -- adaptive threshold time constant\footnotemark[\value{footnote}]
   \item adaptation magnitude -- adaptive threshold scaling factor
-  \item dampening factor -- psuedo-derivative scaling factor \todo{training link}
+  \item dampening factor -- pseudo-derivative scaling factor \todo{training link}
 \end{itemize}
 
+\footnotetext{This is a physics concept beyond the scope of this report. In a
+nutshell, for a time constant \(\tau\) and a time step \(\delta t\), the decay
+factor is given by \(\exp(-\delta t / \tau)\).}
+
 \subsubsection{State}
-The state of an LSNN cell is a tuple of six tensors, as described below:
+The state of an LSNN cell is a tuple of six vectors, as described below:
 
 \todo[inline]{Turn this into a table}
 \begin{itemize}
@@ -78,20 +82,80 @@ and next state. The LSNN cell achieves this as follows:
 
   \item Membrane potentials are reset for neurons spiking in this step.
 
-  \item Adaptive thresholds are increased for ALIF neurons that spiked in this
-  step.
+  \item Adaptive thresholds are increased for ALIF neurons spiking in this step.
 
   \item Refractory counters are initialised for neurons spiking in this step.
 
-  \item New state vectors are packed into a tuple and returned along with
-  internal spikes.
+  \item New state vectors are packed into a tuple and returned along with output
+  spikes.
 
 \end{enumerate}
 
-\subsection{Smoothing the outputs}
+\subsection{Utility cells}
 
-\subsection{Spiking the inputs}
+In addition to the main LSNN cell, several other components were necessary to
+ensure compatibility with Magenta.
+
+\subsubsection{Smoothing the outputs}
+With the functionality described so far, it is only possible to extract
+spike-based outputs from the LSNN. This is potentially problematic -- some steps
+may produce no spikes at all, abstracting away a lot of useful information. To
+convert spikes to real valued outputs, it is common to use leaky readout neurons
+\cite{Bellec2018LSNN, Bellec2020}. In order to make the code modular, this
+functionality was implemented in \texttt{SpikeSmoothingCell}, yet another
+subclass of \texttt{RNNCell}. Its \texttt{call} operation can be described by
+the following equations:
+
+\begin{align}
+  \mathrm{call}(\bm{x}_t, \bm{s}_t) &= (\bm{y}_t, \bm{s}_{t+1}) \\
+  \bm{y}_t &= \bm{x}_t + \alpha\bm{s}_{t-1} \\
+  \bm{s}_{t+1} &= \bm{y}_t
+\end{align}
+
+In other words, this cell uses its state \(\bm{s}\) as a decaying memory of
+spike inputs \(\bm{x}\), where the decay factor is \(\alpha \in [0, 1]\). In
+each step, this memory is updated with the new spikes and returned as the output
+\(\bm{y}\).
+
+\subsubsection{Spiking the inputs}
+As it stands, our recurrent network receives melody event inputs in the form of
+one-hot encoded vectors. These vectors could be interpreted as spikes directly,
+but since SNNs aim to model biological networks, several aspects of realism are
+often introduced:
+
+\begin{itemize}
+  \item \textbf{Time step granularity}. Each input is presented over several
+  timesteps, giving the network more time to settle into a new state and letting
+  the spikes propagate.
+
+  \item \textbf{Neuron populations}. Instead of representing a distinct input
+  category as a single input neuron, it can be represented by a whole
+  population of neurons.
+
+  \item \textbf{Randomness}. Spreading a single input over \(t\) time steps and
+  populations of \(n\) neurons results in \(tn\) total spikes. To avoid
+  oversaturating the network with activity, it is common to make the input
+  spikes stochastic by sampling from a Poisson distribution.
+\end{itemize}
+
+The above functionality is implemented in \texttt{PoissonSpikeWrapper}, which
+again inherits from \texttt{RNNCell}. This class \emph{wraps} another
+\texttt{RNNCell} given in the constructor, and then intercepts calls to the
+underlying cell, dynamically expanding the inputs as required.
+
+This approach may seem a little odd -- why not encode the melodies into this
+expanded form ahead of runtime? That would likely lead to better performance,
+but the issue is that the codebase of Magenta is built on the assumption that a
+single call to an RNN produces a single output. The modifications proposed above
+break this contract, so it would have been necessary to adapt several other
+parts of the Magenta library.
 
 \subsection{Putting it all together}
+
+The components described in the sections above can be used to build a module
+whose interface is identical to that of an LSTM. This enables a seamless
+transition to the LSNN-based variant of Basic RNN.
+
+\missingfigure{Cell diagram}
 
 \end{document}
