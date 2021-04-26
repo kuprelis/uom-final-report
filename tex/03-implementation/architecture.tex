@@ -124,13 +124,13 @@ but since SNNs aim to model biological networks, several aspects of realism are
 often introduced:
 
 \begin{itemize}
-  \item \textbf{Time step granularity}. Each input is presented over several
-  timesteps, giving the network more time to settle into a new state and letting
-  the spikes propagate.
+  \item \textbf{Granular time steps}. Each input is presented over several time
+  steps, giving the network more time to settle into a new state and letting the
+  spikes propagate.
 
-  \item \textbf{Neuron populations}. Instead of representing a distinct input
-  category as a single input neuron, it can be represented by a whole
-  population of neurons.
+  \item \textbf{Neuron populations}. Instead of feeding the inputs via
+  individual neurons, whole populations can be assigned to each distinct input
+  category.
 
   \item \textbf{Randomness}. Spreading a single input over \(t\) time steps and
   populations of \(n\) neurons results in \(tn\) total spikes. To avoid
@@ -139,9 +139,9 @@ often introduced:
 \end{itemize}
 
 The above functionality is implemented in \texttt{PoissonSpikeWrapper}, which
-again inherits from \texttt{RNNCell}. This class \emph{wraps} another
-\texttt{RNNCell} given in the constructor, and then intercepts calls to the
-underlying cell, dynamically expanding the inputs as required.
+again inherits from \texttt{RNNCell}. This class wraps another cell passed via
+the constructor, and then intercepts all calls to that cell, dynamically
+expanding the inputs as required.
 
 This approach may seem a little odd -- why not encode the melodies into this
 expanded form ahead of runtime? That would likely lead to better performance,

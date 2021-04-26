@@ -11,7 +11,7 @@ this can be extracted from MIDI files. This project uses the Lakh MIDI dataset
 
 The MIDI format is too verbose to be fed directly into the model. Using
 Magenta's \texttt{pipelines} package, the MIDI files are taken through several
-preprocessing stages in order to acquire appropriately structured input data.
+preprocessing stages to produce appropriately structured input data.
 
 \todo[inline]{Consider summarising processing parameters in a table}
 
@@ -42,10 +42,9 @@ timing are split into subsequences of constant timing.
 
 \subsubsection{Quantisation}
 
-Basic RNN is a simple model that has no concept of time, therefore it assumes
-that melody events are evenly spaced in time. In reality, MIDI events are
-bounded by arbitrary start and end times. Therefore, this stage of the pipeline
-aligns the events to a fixed grid.
+Basic RNN assumes that melody events are evenly spaced in time. In reality, MIDI
+events are bounded by arbitrary start and end times. Therefore, this stage of
+the pipeline aligns the MIDI events to a fixed grid.
 
 \missingfigure{Ableton quantisation}
 
