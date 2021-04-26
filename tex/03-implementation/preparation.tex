@@ -1,0 +1,104 @@
+\documentclass[../../report.tex]{subfiles}
+\begin{document}
+\section{Data Preparation}
+
+In order to train the models, a melody dataset is required. As discussed before,
+this can be extracted from MIDI files. This project uses the Lakh MIDI dataset
+\cite{Raffel2016}, more precisely its `clean MIDI subset'. It contains
+\num{17244} musical compositions of various genres.
+
+\subsection{MIDI processing pipeline}
+
+The MIDI format is too verbose to be fed directly into the model. Using
+Magenta's \texttt{pipelines} package, the MIDI files are taken through several
+preprocessing stages in order to acquire appropriately structured input data.
+
+\todo[inline]{Consider summarising processing parameters in a table}
+
+\subsubsection{Conversion}
+
+First of all, each MIDI file is converted into a \texttt{NoteSequence} protocol
+buffer\footnotemark{}, which is provided by the \texttt{note-seq} library
+\cite{NoteSeq}. This library simplifies manipulation of note sequences, and its
+utilities are used to implement most of the stages in this pipeline.
+
+\footnotetext{A protocol buffer is a compact and efficient format for
+serialising structured data, roughly equivalent to XML or JSON.}
+
+\subsubsection{Partitioning}
+
+As with all machine learning experiments, the dataset is split into training and
+evaluation partitions. The sequences in the training set will be used to adjust
+model parameters, whereas the evaluation set will serve as a test of the model's
+predictive capabilities.
+
+\subsubsection{Handling time changes}
+
+MIDI files can encode music with changes in tempo or time signature. To reduce
+the complexity of data that the model has to generalise, sequences with variable
+timing are split into subsequences of constant timing.
+
+\missingfigure{Time signature change}
+
+\subsubsection{Quantisation}
+
+Basic RNN is a simple model that has no concept of time, therefore it assumes
+that melody events are evenly spaced in time. In reality, MIDI events are
+bounded by arbitrary start and end times. Therefore, this stage of the pipeline
+aligns the events to a fixed grid.
+
+\missingfigure{Ableton quantisation}
+
+\subsubsection{Melody extraction}
+
+The preceding stages apply transformations at the scale of whole MIDI files,
+which may contain multiple tracks. In this stage, each track is processed
+individually and monophonic melodies are extracted. There may be several
+melodies produced from a single track, as segments of silence are removed.
+
+\subsubsection{Validation}
+
+Each melody is validated against two criteria:
+
+\begin{itemize}
+  \item Must be at least 7 bars long. Short melodies are not very useful, as
+  they do not help the model learn long-term structure.
+
+  \item Must contain at least 5 unique pitches. This ensures that the model is
+  not trained on overly repetitive melodies, such as those in accompaniment
+  tracks.
+\end{itemize}
+
+Melodies failing to satisfy these criteria are discarded.
+
+\subsubsection{Truncation}
+
+Longer melodies increase the amount of RAM required to train the model. To avoid
+exceeding the hardware limitations of this project, all sequences are truncated
+to 128 steps.
+
+\subsubsection{Model encoding}
+
+Finally, melodies are converted into the model-specific format. For Basic RNN,
+this simply means mapping melody event labels to the corresponding one-hot
+vectors. A simplified example for a melody \(\bm{m}\) is given below.
+
+\begin{align}
+  \bm{m} &=
+  \begin{bmatrix}
+    0 & -2 & -2 & 1 & -1 & 2 & 2
+  \end{bmatrix}
+  \\
+  \mathrm{encode}(\bm{m}) &=
+  \begin{bmatrix}
+    0 & 1 & 1 & 0 & 0 & 0 & 0 \\
+    0 & 0 & 0 & 0 & 1 & 0 & 0 \\
+    1 & 0 & 0 & 0 & 0 & 0 & 0 \\
+    0 & 0 & 0 & 1 & 0 & 0 & 0 \\
+    0 & 0 & 0 & 0 & 0 & 1 & 1
+  \end{bmatrix}
+\end{align}
+
+\todo[inline]{Label table}
+
+\end{document}
