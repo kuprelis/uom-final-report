@@ -36,7 +36,7 @@ inputs belonging to different classes are \emph{linearly separable} (figure
   \label{fig:representation-learning}
 \end{figure}
 
-\subsection{Feedforward Networks}
+\subsection{Feedforward networks}
 
 As introduced above, these powerful feature extractors consist of several
 layers. First, there is the input layer, which is filled with input data prior
@@ -68,7 +68,7 @@ this forms the foundation for backpropagation, a procedure that computes the
 influence towards the loss function for every network parameter \emph{in
 isolation} (figure \ref{fig:backpropagation}).
 
-\subsubsection{Gradient Descent}
+\subsubsection{Gradient descent}
 Once calculated, the error contributions of individual parameters can be
 combined into a \emph{gradient}, which in a sense describes the direction of
 steepest increase\footnotemark{} for the loss function. Of course, as this
@@ -87,7 +87,7 @@ space.}
   \label{fig:backpropagation}
 \end{figure}
 
-\subsection{Recurrent Networks}
+\subsection{Recurrent networks}
 
 Although feedforward networks are undoubtedly powerful, they are not very well
 suited for processing sequential data. This is partially because they require
@@ -100,7 +100,7 @@ previous state is used in combination with the input to produce the next state
 (figure \ref{fig:rnn-unrolled}). This is quite different from a feedforward
 network, whose output depends purely on the current input.
 
-\subsubsection{Backpropagation Through Time}
+\subsubsection{Backpropagation through time}
 The optimisation procedure for recurrent networks is similar to that of
 feedforward networks. If we unfold the RNN across time steps, the result is
 essentially a feedforward network with many\footnotemark{} hidden layers (figure

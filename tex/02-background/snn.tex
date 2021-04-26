@@ -17,7 +17,7 @@ efficiency of the brain. And with the advent of neuromorphic computing platforms
 such as SpiNNaker \cite{Furber2014} and Intel Loihi \cite{Davies2018},
 simulating brain-like circuits is becoming feasible.
 
-\subsection{Neuron Model}
+\subsection{Neuron model}
 
 For the purposes of this project, neurons shall be implemented according to the
 prominent \emph{leaky integrate-and-fire} (LIF) model. LIF neurons are shapeless
@@ -36,7 +36,7 @@ incoming stimulus.
   \label{fig:neuron}
 \end{figure}
 
-\subsubsection{Neuronal Adaptation}
+\subsubsection{Neuronal adaptation}
 The standard LIF model omits an important property observed in experimental
 evidence -- spike frequency adaptation. When stimulated with a constant input
 current, many neurons exhibit a reduction in firing rate after the initial burst
@@ -64,7 +64,7 @@ requires storing past neuron states for error signal computation
 long as the discontinuous spike function is replaced by a differentiable
 alternative \cite{Bellec2018LSNN}.
 
-\subsection{Biological Plausibility}
+\subsection{Biological plausibility}
 
 Traditional ANNs have the freedom to diverge from biological realism, and to do
 whatever gives good results. SNNs have not yet outperformed ANNs, but it is
