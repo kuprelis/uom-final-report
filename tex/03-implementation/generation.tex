@@ -1,0 +1,76 @@
+\documentclass[../../report.tex]{subfiles}
+\begin{document}
+\section{Melody Generation}
+
+Once the model is trained to a desired extent, it can be used to generate
+melodies. By default, a single C4 note is used as the starting point.
+
+A naive generation algorithm would simply select the event with the highest
+probability at each step, feed it back into the model as input, and repeat until
+a sufficiently long sequence is produced. However, a fully greedy strategy is
+unlikely to produce a sequence that has the highest overall likelihood. Consider
+the following toy example, where \(\bm{p}\) represents the maximal transition
+probabilities observed when following a fully greedy strategy, and \(\bm{q}\) is
+obtained by a strategy that instead picks the second best option in the initial
+step.
+
+\begin{align}
+  \bm{p} &= [0.9, 0.1, 0.1] & \prod_{i} p_i &= 0.009
+  \\
+  \bm{q} &= [0.5, 0.5, 0.5] & \prod_{i} q_i &= 0.125
+\end{align}
+
+As made evident by \(\bm{q}\), it is sometimes worthwhile to pick a less likely
+option, if it leads to higher subsequent probabilities.
+
+\subsection{Beam search}
+
+Instead of using the naive strategy, melodies can be generated using \emph{beam
+search}. Strictly speaking, it is also a greedy strategy. However, beam search
+keeps more options in consideration for a longer time, which is good enough to
+find sequences with considerably higher likelihoods.
+
+\subsubsection{Algorithm}
+
+Beam search is parameterised by a branch factor \(b\) and beam width \(w\),
+where the beam is a list of potential output sequences. The algorithm iterates
+until the sequences reach a specified length, repeating two main steps in each
+iteration:
+
+\begin{enumerate}
+  \item \textbf{Pruning}. The sequences in the current beam are sorted by
+  likelihood. The top \(w\) sequences are kept, while others are discarded.
+
+  \item \textbf{Branching}. For each sequence in the beam, the model is used to
+  predict a probability distribution over all choices for the next event. The
+  top \(b\) events are used to branch each sequence into \(b\) extended
+  sequences.
+\end{enumerate}
+
+Finally, the most likely sequence in the beam is returned as the output.
+
+\subsection{Agency}
+
+Generative models are most useful when their output obeys conditioning signals.
+For example, a musician may want to generate a continuation of an existing
+melody. This model gives the user agency through two parameters.
+
+\subsubsection{Temperature}
+Before applying the softmax function to the output layer, activations are
+divided by the \emph{temperature} value, which defaults to 1. Increasing this
+value makes the probability distribution smoother, introducing more randomness
+into the output. Conversely, decreasing the temperature accentuates the peaks in
+the probability distribution, leading to more predictable behaviour.
+
+Ironically, using beam search usually leads to `melodies' consisting of nothing
+but silence. After all, it is quite likely that the \emph{no-event} label is the
+most common one in the dataset. Increasing the temperature ensures that beam
+search is not biased towards silence.
+
+\subsubsection{Melody priming}
+The model can be primed with a predefined melody, given either as a MIDI file,
+or as an array literal in a command line flag. This melody is then fed into the
+model to initialise its state. Next, the generation process continues as before,
+hopefully producing a sensible continuation to the primer melody.
+
+\end{document}
