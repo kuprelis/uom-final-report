@@ -70,12 +70,12 @@ can be combined with the upstream loss gradient \(\frac{dL}{ds}\).
 \begin{align}
   v_\mathrm{scaled} &= \frac{v}{v_\mathrm{thr}} - 1
   \\
-  \frac{ds}{dv} &= \max(0, 1 - \left| v_\mathrm{scaled} \right|)
+  \frac{ds}{dv} &= \max(0, 1 - \left| v_\mathrm{scaled} \right|) \cdot \gamma
   \\
-  \frac{dL}{dv} &= \frac{ds}{dv} \cdot \frac{dL}{ds} \cdot \gamma
+  \frac{dL}{dv} &= \frac{ds}{dv} \cdot \frac{dL}{ds}
 \end{align}
 
-The gradient is scaled by a dampening factor \(\gamma = 0.3\). This stabilises
+The derivative is scaled by a dampening factor \(\gamma = 0.3\). This stabilises
 learning by preventing erratic loss gradients.
 
 \missingfigure{Dampening experiment graphs}
@@ -87,12 +87,29 @@ firing frequency \(f_\mathrm{target}\) are penalised using an additional square
 term in the loss function.
 
 \begin{align}
-  L_\mathrm{rate} = \frac{1}{2} (\bm{f} - f_\mathrm{target})^2
+  L_\mathrm{rate} = \frac{1}{2} (f - f_\mathrm{target})^2
 \end{align}
 
-The firing rate \(f_i\) of neuron \(i\) is calculated by averaging the value of
-its spike function across all time steps in the sequence.
+The firing rate \(f\) is calculated for each neuron individually by averaging
+the value of its spike function across all time steps in the sequence.
 
-\subsection{Limitations}
+\subsection{Hardware limitations}
+
+All models were trained using a laptop-grade GPU with only 2 gigabytes of
+memory, which imposed hard limits on the training procedure.
+
+During the first few training attempts, it became clear that long melodies are
+problematic. When feeding inputs into the model, TensorFlow retains all
+intermediate RNN states in memory, so that they can later be used to compute the
+loss gradient. This can cause out-of-memory errors with longer sequences. To
+stay within the memory budget, all melodies were truncated to a maximum length
+of 128 steps.
+
+Almost all model configurations were trained on batches of 128 melodies. Batch
+size is also a major factor in memory usage, but it was crucial not to
+compromise in this regard. Melodies are highly variable, so the hope is that
+averaging the loss across a large batch prevents the model from overfitting to
+the quirks of a single melody. Instead, the model is forced to learn general
+patterns.
 
 \end{document}
