@@ -57,14 +57,13 @@ intricate acoustic features, which may be lost in symbolic representations.
 \cite{Dieleman2020}
 
 Unfortunately, PCM produces immensely long sequences. Human hearing is limited
-to frequencies below \num{20} kHz, and by the Nyquist--Shannon sampling theorem
-we know that to capture all information in that range, the sampling frequency
-must be at least twice that, i.e. \num{40} kHz or more. This means that one
-second of audio is represented by \num{40000} steps, and usually generative
-models are required to produce several seconds of audio. This can get out of
-hand quickly, therefore many models have opted for a reduced sample rate of
-\num{16} or \num{24} kHz, striking a balance between fidelity and computational
-complexity. \cite{Dieleman2020}
+to frequencies below 20 kHz, and by the Nyquist--Shannon sampling theorem we
+know that to capture all information in that range, the sampling frequency must
+be at least twice that, i.e. 40 kHz or more. This means that one second of audio
+is represented by \num{40000} steps, and usually generative models are required
+to produce several seconds of audio. This can get out of hand quickly, therefore
+many models have opted for a reduced sample rate of 16 or 24 kHz, striking a
+balance between fidelity and computational complexity. \cite{Dieleman2020}
 
 \begin{figure}
   \centering
