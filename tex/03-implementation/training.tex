@@ -1,0 +1,98 @@
+\documentclass[../../report.tex]{subfiles}
+\begin{document}
+\section{Training}
+
+The model is optimised by repeating a simple training loop comprised of several
+steps:
+
+\begin{enumerate}
+  \item A batch of melodies is randomly sampled from the training set.
+
+  \item The melody batch is fed as an input to the model.
+
+  \item Predicted events are compared against the true labels to calculate the
+  loss.
+
+  \item Model parameters are adjusted according to the loss gradient.
+\end{enumerate}
+
+\subsection{Loss}
+
+The final layer in the model produces an output vector \(\bm{y}\) containing 38
+activation values, one for each possible melody event. Note that the magnitude
+of these values is unbounded, therefore a probability distribution
+\(\bm{\hat{p}}\) is computed using the softmax function:
+
+\begin{equation}
+  \hat{p}_i = \frac{ \exp(y_i) }{ \sum_{j} \exp(y_j) }
+\end{equation}
+
+As is common in classification tasks, the accuracy of the estimated probability
+distribution \(\bm{\hat{p}}\) is quantified against the ground truth \(\bm{p}\)
+using \emph{cross-entropy} loss:
+
+\begin{equation}
+  L(\bm{p}, \bm{\hat{p}}) = - \bm{p} \cdot \log(\bm{\hat{p}})
+\end{equation}
+
+In fact, since \(\bm{p}\) is effectively a one-hot vector, the loss is simply
+the negated log probability of the ground truth label.
+
+The per-batch loss value is obtained by averaging the loss across all individual
+predictions for the melodies in that batch.
+
+\subsection{LSNN details}
+
+Swapping the LSTM for an LSNN introduces additional considerations to the
+training procedure.
+
+\subsubsection{Custom gradient}
+Formally, the value of a neuron's spike function \(s\) at time \(t\) is defined
+by the Heaviside step function.
+
+\begin{align}
+  s_t &= H(v_t - v_\mathrm{thr})
+  \\
+  H(x) &=
+  \begin{cases}
+  1 & \text{if } x \geq 0 \\
+  0 & \text{if } x < 0
+  \end{cases}
+\end{align}
+
+In other words, the value is 1 if the membrane voltage \(v_t\) is greater than
+or equal to firing threshold \(v_\mathrm{thr}\), and 0 otherwise. Being
+piecewise constant, the spike function is unsuitable for backpropagation.
+Therefore, it is necessary to define a pseudo-derivative \(\frac{ds}{dv}\) that
+can be combined with the upstream loss gradient \(\frac{dL}{ds}\).
+\todo[inline]{Consider adding function graphs}
+
+\begin{align}
+  v_\mathrm{scaled} &= \frac{v}{v_\mathrm{thr}} - 1
+  \\
+  \frac{ds}{dv} &= \max(0, 1 - \left| v_\mathrm{scaled} \right|)
+  \\
+  \frac{dL}{dv} &= \frac{ds}{dv} \cdot \frac{dL}{ds} \cdot \gamma
+\end{align}
+
+The gradient is scaled by a dampening factor \(\gamma = 0.3\). This stabilises
+learning by preventing erratic loss gradients.
+
+\missingfigure{Dampening experiment graphs}
+
+\subsubsection{Firing rate regularisation}
+
+To prevent biologically unrealistic firing rates, deviations from the target
+firing frequency \(f_\mathrm{target}\) are penalised using an additional square
+term in the loss function.
+
+\begin{align}
+  L_\mathrm{rate} = \frac{1}{2} (\bm{f} - f_\mathrm{target})^2
+\end{align}
+
+The firing rate \(f_i\) of neuron \(i\) is calculated by averaging the value of
+its spike function across all time steps in the sequence.
+
+\subsection{Limitations}
+
+\end{document}
