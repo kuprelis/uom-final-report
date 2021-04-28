@@ -1,0 +1,66 @@
+\documentclass[../../report.tex]{subfiles}
+\begin{document}
+\section{Hyperparameter Tuning}
+
+In order to ensure a fair comparison between the two different model
+architectures, it is imperative to ensure that the values of hyperparameters are
+optimal. Generally, this is a non-trivial task, and in research projects it
+often accounts for the vast majority of compute time \cite{Strubell2019}. Given
+the hardware limitations in this project, hyperparameter search was limited to a
+handful of informed guesses, as opposed to a more systematic approach (e.g. grid
+search).
+
+\subsection{LSNN parameters}
+
+By analysing successful LSNN experiments described in literature
+\cite{Bellec2018LSNN, Bellec2020}, a base configuration was devised (table
+\ref{tab:lsnn-base}).
+
+\begin{table}
+  \begin{center}
+    \renewcommand{\arraystretch}{1.25}
+    \begin{tabular}{ r | r | l  }
+      Parameter & Value & Description
+      \\ \hline
+      \(B\) & 128 & Batch size
+      \\
+      \(\eta\) & 0.001 & Learning rate
+      \\
+      \(\gamma\) & 0.3 & Pseudo-derivative dampening factor
+      \\
+      \(N\) & (512) & Neurons per layer (tuple)
+      \\
+      \(n_\mathrm{in}\) & 1 & Neurons per input class
+      \\
+      \(n_\alpha\) & 0.4 & Fraction of neurons with adaptation
+      \\
+      \(\delta t\) & 1.0 & Time step (ms)
+      \\
+      \(t_r\) & 2 & Number of refractory time steps
+      \\
+      \(t_\mathrm{in}\) & 5 & Number of time steps per input event
+      \\
+      \(\tau_\mathrm{out}\) & 3.0 & Output readout time constant (ms)
+      \\
+      \(\tau_v\) & 20.0 & Membrane potential time constant (ms)
+      \\
+      \(\tau_\alpha\) & 500.0 & Neuronal adaptation time constant (ms)
+      \\
+      \(\alpha\) & 0.1 & Neuronal adaptation magnitude
+      \\
+      \(v_\mathrm{thr}\) & 1.0 & Threshold membrane potential
+      \\
+      \(f_\mathrm{in}\) & 1000 & Input firing rate (Hz)
+      \\
+      \(f_\mathrm{reg}\) & 20 & Firing rate regularisation target (Hz)
+      \\
+    \end{tabular}
+  \end{center}
+  \caption{Base LSNN configuration}
+  \label{tab:lsnn-base}
+\end{table}
+
+\subsection{LSTM parameters}
+
+
+\end{document}
