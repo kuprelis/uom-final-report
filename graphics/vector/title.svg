@@ -54,9 +54,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.70710678"
-     inkscape:cx="502.65493"
-     inkscape:cy="649.77467"
+     inkscape:zoom="1.4142136"
+     inkscape:cx="325.97112"
+     inkscape:cy="393.63604"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
@@ -139,7 +139,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -213,16 +213,6 @@
        stroke="#000000"
        d="m 67.040495,100.31169 c -5.541513,-0.14395 -12.022442,13.08849 -11.80699,24.88932 0.05013,3.5943 1.184479,10.88393 2.839678,20.0391 -10.438694,10.80426 -22.560174,21.89239 -22.560174,36.441 -0.166454,13.33254 7.981938,30.31851 27.314419,30.15515 2.967312,-0.0193 5.637495,-0.38804 8.009506,-1.02114 1.767528,9.69027 2.942813,17.3383 2.935661,20.87132 0.06225,13.92778 -18.236834,15.30628 -19.113961,7.30087 3.856688,-0.13278 6.925096,-3.19607 6.925096,-6.98433 0,-3.86998 -3.204208,-7.0252 -7.180379,-7.0252 -2.18617,0 -4.13443,0.95985 -5.455737,2.46088 -0.03056,0.0309 -0.06638,0.0613 -0.09593,0.092 -0.298158,0.31647 -0.549344,0.69436 -0.797476,1.12319 -0.814836,1.37852 -1.343765,3.35943 -1.372361,6.18789 0,11.66096 29.484269,19.16603 29.484269,-3.82912 0.04597,-3.09395 -1.284544,-10.94622 -3.222597,-20.84067 21.037722,-7.60717 15.752508,-38.84263 -3.6055,-38.98967 -1.501023,0.0153 -2.94791,0.18986 -4.339673,0.54321 -1.102786,-5.30668 -2.166781,-10.45712 -3.095976,-15.1899 7.350888,-7.2202 13.769526,-16.56632 13.625558,-33.79128 0.02241,-12.36958 -4.098694,-22.28855 -8.487394,-22.43253 z m 1.308029,11.9663 c 2.507812,-0.24197 4.49896,2.08611 4.49896,7.21099 0.203188,8.80187 -5.963221,16.48875 -13.305956,24.21948 -0.70252,-4.23449 -1.163034,-7.6654 -1.21306,-9.70047 0.208314,-13.7501 5.839669,-21.32666 10.020056,-21.73 z m -7.881872,45.62988 c 0.895502,4.6103 1.862486,9.46764 2.839678,14.35975 -12.812762,4.55819 -18.961825,22.4172 -0.79749,30.40933 -11.071788,-9.42577 -5.622176,-20.58333 2.360789,-22.52747 2.007481,10.02312 3.96799,19.91348 5.552735,28.46007 -2.151449,0.75561 -4.66233,1.19469 -7.594936,1.21515 -7.332513,0 -21.985303,-4.66647 -21.985303,-22.33657 0,-14.79983 10.258993,-20.81412 19.624527,-29.58026 z m 6.222576,21.92199 c 0.319585,-0.0192 0.665756,-0.0115 0.988428,0 13.33862,0 18.369578,21.18272 4.786909,27.95262 -1.689907,-8.49555 -3.739261,-18.23687 -5.775337,-27.95262 z"
        style="opacity:1;fill:#9e9e9e;fill-opacity:1;stroke:#9e9e9e;stroke-width:1.021;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-    <text
-       xml:space="preserve"
-       id="text867"
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:10.5833px;line-height:1.25;font-family:'CMU Serif';-inkscape-font-specification:'CMU Serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:end;white-space:pre;shape-inside:url(#rect869);fill:#000000;fill-opacity:1;stroke:none;"
-       transform="translate(-15.298824,-24.469633)"
-       x="102.81654"
-       y="0"><tspan
-         x="101.81555"
-         y="91.846193"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:10.5833px;font-family:'CMU Serif';-inkscape-font-specification:'CMU Serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:end;text-anchor:end">Melody Generation</tspan></tspan></text>
     <text
        xml:space="preserve"
        id="text873"
@@ -419,15 +409,15 @@
        style="fill:black;fill-opacity:1;line-height:1.25;stroke:none;font-family:sans-serif;font-style:normal;font-weight:normal;font-size:10.58333333px;white-space:pre;shape-inside:url(#rect1249);" />
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;line-height:1.25;font-family:'CMU Serif';-inkscape-font-specification:'CMU Serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:end;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
-       x="190"
-       y="78.969002"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;line-height:1.25;font-family:'CMU Serif';-inkscape-font-specification:'CMU Serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="97"
+       y="75.974167"
        id="text1259"><tspan
          sodipodi:role="line"
          id="tspan1257"
-         x="190"
-         y="78.969002"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;font-family:'CMU Serif';-inkscape-font-specification:'CMU Serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:end;text-anchor:end;stroke-width:0.264583">with Spiking Neural Networks</tspan></text>
+         x="97"
+         y="75.974167"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:'CMU Serif';-inkscape-font-specification:'CMU Serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;text-anchor:start;stroke-width:0.264583">with Spiking Neural Networks</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333px;line-height:1.25;font-family:'CMU Serif';-inkscape-font-specification:'CMU Serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
@@ -477,15 +467,15 @@
          id="tspan922-4-3">Supervisor</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.64444px;line-height:1.25;font-family:'CMU Serif';-inkscape-font-specification:'CMU Serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:end;text-anchor:end;fill:#616161;fill-opacity:1;stroke:none;stroke-width:0.264583"
-       x="190"
-       y="90.182068"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.64444px;line-height:1.25;font-family:'CMU Serif';-inkscape-font-specification:'CMU Serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;text-anchor:start;fill:#424242;fill-opacity:1;stroke:none;stroke-width:0.264583;"
+       x="97"
+       y="89.917244"
        id="text988"><tspan
          sodipodi:role="line"
          id="tspan986"
-         x="190"
-         y="90.182068"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.64444px;font-family:'CMU Serif';-inkscape-font-specification:'CMU Serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:end;text-anchor:end;fill:#616161;fill-opacity:1;stroke-width:0.264583">Final Year Project Report</tspan></text>
+         x="97"
+         y="89.917244"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.64444px;font-family:'CMU Serif';-inkscape-font-specification:'CMU Serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;text-anchor:start;fill:#424242;fill-opacity:1;stroke-width:0.264583;">Final Year Project Report</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333px;line-height:1.25;font-family:'CMU Serif';-inkscape-font-specification:'CMU Serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
@@ -508,5 +498,16 @@
          y="246.46605"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.64444px;font-family:'CMU Serif';-inkscape-font-specification:'CMU Serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;text-anchor:start;stroke-width:0.264583"
          id="tspan922-4-4">Simas Kuprelis</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:9.87778px;line-height:1.25;font-family:'CMU Serif';-inkscape-font-specification:'CMU Serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583"
+       x="97"
+       y="65.963837"
+       id="text909"><tspan
+         sodipodi:role="line"
+         x="97"
+         y="65.963837"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:9.87778px;font-family:'CMU Serif';-inkscape-font-specification:'CMU Serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583"
+         id="tspan911">Melody Generation</tspan></text>
   </g>
 </svg>
