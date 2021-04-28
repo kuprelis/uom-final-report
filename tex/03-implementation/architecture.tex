@@ -108,12 +108,12 @@ the following equations:
 
 \begin{align}
   \mathrm{call}(\bm{x}_t, \bm{s}_t) &= (\bm{y}_t, \bm{s}_{t+1}) \\
-  \bm{y}_t &= \bm{x}_t + \alpha\bm{s}_{t-1} \\
+  \bm{y}_t &= \bm{x}_t + \lambda\bm{s}_{t-1} \\
   \bm{s}_{t+1} &= \bm{y}_t
 \end{align}
 
 In other words, this cell uses its state \(\bm{s}\) as a decaying memory of
-spike inputs \(\bm{x}\), where the decay factor is \(\alpha \in [0, 1]\). In
+spike inputs \(\bm{x}\), where the decay factor is \(\lambda \in [0, 1]\). In
 each step, this memory is updated with the new spikes and returned as the output
 \(\bm{y}\).
 
