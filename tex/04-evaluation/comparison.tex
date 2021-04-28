@@ -1,0 +1,46 @@
+\documentclass[../../report.tex]{subfiles}
+\begin{document}
+\section{Comparison}
+
+The optimal set of hyperparameters determined in the previous section shall now
+be used to compare the LSNN model against the baseline LSTM model.
+
+\subsection{LSTM configuration}
+
+Although LSTM and LSNN are vastly different models under the hood, one way to
+make the comparison fair is by equalising the number of trainable weights
+between the two models. The functions below give the number of weights for
+LSTM, LSNN, and linear layers with \(n\) inputs and \(m\) outputs.
+
+\begin{align}
+  W_\mathrm{LSTM}(n, m) &= 4 \cdot (nm + m^2 + m)
+  \\
+  W_\mathrm{LSNN}(n, m) &= nm + m^2
+  \\
+  W_\mathrm{linear}(n, m) &= nm
+\end{align}
+
+The total number of weights in the chosen LSNN configuration is:
+
+\begin{equation}
+  n = W_\mathrm{LSNN}(38, 512) + W_\mathrm{linear}(512, 38) = \num{301056}
+\end{equation}
+
+The default configuration of Basic RNN uses two LSTM layers of 128 units each,
+as this has been found to give good results. For the comparison, the layer sizes
+shall be modified such that the number of weights becomes as close to \(n\) as
+possible. The optimal layer size \(x\) can be determined by solving the
+following equation:
+
+\begin{align}
+  n &= W_\mathrm{LSTM}(38, x) + W_\mathrm{LSTM}(x, x) + W_\mathrm{linear}(x, 38) \\
+  x &\approx 150 \\
+\end{align}
+
+Therefore, the layer sizes will be set to \((150, 150)\) for the comparison. All
+other parameters of the LSTM remain unchanged.
+
+\subsection{Results}
+
+
+\end{document}
