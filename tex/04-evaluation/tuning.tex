@@ -6,9 +6,9 @@ In order to ensure a fair comparison between the two different model
 architectures, it is imperative to ensure that the values of hyperparameters are
 optimal. Generally, this is a non-trivial task, and in research projects it
 often accounts for the vast majority of compute time \cite{Strubell2019}. Given
-the hardware limitations in this project, hyperparameter search was limited to a
-handful of informed guesses, as opposed to a more systematic approach (e.g. grid
-search).
+the hardware limitations in this project, hyperparameter search was restricted
+to a handful of informed guesses, as opposed to a more systematic approach (e.g.
+grid search).
 
 \subsection{Experiments}
 
@@ -107,5 +107,14 @@ perturbing individual parameters in isolation (table
   \caption{Experimental LSNN configurations}
   \label{tab:lsnn-experiments}
 \end{table}
+
+\subsection{Results}
+
+All experimental configurations were trained for \num{3000} steps. To maximise
+training speed, testing on the evaluation dataset was only performed every
+\num{1000} steps. Finally, the configuration with the highest event prediction
+accuracy was chosen, which turned out to be \texttt{lsnn-rigid}.
+
+\missingfigure{Plots}
 
 \end{document}
