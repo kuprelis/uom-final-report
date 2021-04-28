@@ -25,7 +25,7 @@ option, if it leads to higher subsequent probabilities.
 
 \subsection{Beam search}
 
-Instead of using the naive strategy, melodies can be generated using \emph{beam
+Instead of using the naive strategy, melodies are generated using \emph{beam
 search}. Strictly speaking, it is also a greedy strategy. However, beam search
 keeps more options in consideration for a longer time, which is good enough to
 find sequences with considerably higher likelihoods.
@@ -38,13 +38,12 @@ until the sequences reach a specified length, repeating two main steps in each
 iteration:
 
 \begin{enumerate}
+  \item \textbf{Branching}. For each sequence in the beam, the model is used to
+  predict a probability distribution over the next events. The top \(b\) events
+  are used to branch each sequence into \(b\) extended sequences.
+
   \item \textbf{Pruning}. The sequences in the current beam are sorted by
   likelihood. The top \(w\) sequences are kept, while others are discarded.
-
-  \item \textbf{Branching}. For each sequence in the beam, the model is used to
-  predict a probability distribution over all choices for the next event. The
-  top \(b\) events are used to branch each sequence into \(b\) extended
-  sequences.
 \end{enumerate}
 
 Finally, the most likely sequence in the beam is returned as the output.
@@ -52,8 +51,15 @@ Finally, the most likely sequence in the beam is returned as the output.
 \subsection{Agency}
 
 Generative models are most useful when their output obeys conditioning signals.
-For example, a musician may want to generate a continuation of an existing
-melody. This model gives the user agency through two parameters.
+For example, a musician may wish to create a melody that begins with a specific
+motif, with the rest dreamed up by the model. To enable the user with such
+agency, this model exposes two customisation parameters.
+
+\subsubsection{Primer melody}
+The model can be primed with an input melody, given either as a MIDI file, or as
+an array literal on the command line. This melody is then fed into the model to
+initialise its state. Next, the generation process continues as before,
+hopefully producing a sensible continuation to the primer melody.
 
 \subsubsection{Temperature}
 Before applying the softmax function to the output layer, activations are
@@ -63,14 +69,8 @@ into the output. Conversely, decreasing the temperature accentuates the peaks in
 the probability distribution, leading to more predictable behaviour.
 
 Ironically, using beam search usually leads to `melodies' consisting of nothing
-but silence. After all, it is quite likely that the \emph{no-event} label is the
-most common one in the dataset. Increasing the temperature ensures that beam
-search is not biased towards silence.
-
-\subsubsection{Melody priming}
-The model can be primed with a predefined melody, given either as a MIDI file,
-or as an array literal in a command line flag. This melody is then fed into the
-model to initialise its state. Next, the generation process continues as before,
-hopefully producing a sensible continuation to the primer melody.
+but silence. After all, it is quite likely that the \emph{no-event} label
+dominates the dataset. Nevertheless, this problem can be alleviated by
+increasing the temperature. This makes beam search less biased towards silence.
 
 \end{document}
