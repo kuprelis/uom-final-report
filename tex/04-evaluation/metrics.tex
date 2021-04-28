@@ -1,0 +1,29 @@
+\documentclass[../../report.tex]{subfiles}
+\begin{document}
+\section{Metrics}
+
+In each step, the model chooses one of 38 possible events. This means that
+random guessing would give an overall accuracy of \(\frac{1}{38} \approx 3\%\).
+However, the model is quick to learn that \emph{no-event} is by far the most
+common label in the dataset, leading to a rapid increase in \emph{no-event
+accuracy}. This can give a false impression of good performance -- in reality,
+the model still has no ability to predict notes correctly.
+
+\missingfigure{Initial accuracies}
+
+In order to avoid the issue explained above, all experiments were evaluated
+according to the single metric of \emph{event accuracy}. More precisely, this is
+the percentage of correct predictions in positions whose ground truth label is
+\emph{note-off} or any of the 36 \emph{note-on} events.
+
+For LSNNs, it is also interesting to keep track of the average neuron firing
+rate. Firing rate regularisation\todo{ref} was applied in all performed
+experiments, and the network was able to converge to the target rate. Overall,
+this means that the model learns to represent information using a temporal
+coding. This is especially important on neuromorphic hardware such as SpiNNaker
+\cite{Furber2014}, where a reduction in firing rate leads to reduced energy
+consumption.
+
+\missingfigure{Firing rate graph}
+
+\end{document}
