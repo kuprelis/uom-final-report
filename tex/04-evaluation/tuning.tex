@@ -10,16 +10,18 @@ the hardware limitations in this project, hyperparameter search was limited to a
 handful of informed guesses, as opposed to a more systematic approach (e.g. grid
 search).
 
-\subsection{LSNN parameters}
+\subsection{Experiments}
 
-By analysing successful LSNN experiments described in literature
-\cite{Bellec2018LSNN, Bellec2020}, a base configuration was devised (table
-\ref{tab:lsnn-base}).
+After analysing successful LSNN configurations described in literature
+\cite{Bellec2018LSNN, Bellec2020}, an candidate set of hyperparameters was
+devised (table \ref{tab:lsnn-base}). Then, several experiments were performed by
+perturbing individual parameters in isolation (table
+\ref{tab:lsnn-experiments}).
 
 \begin{table}
   \begin{center}
     \renewcommand{\arraystretch}{1.25}
-    \begin{tabular}{ r | r | l  }
+    \begin{tabular}{ r | r | l }
       Parameter & Value & Description
       \\ \hline
       \(B\) & 128 & Batch size
@@ -60,7 +62,50 @@ By analysing successful LSNN experiments described in literature
   \label{tab:lsnn-base}
 \end{table}
 
-\subsection{LSTM parameters}
-
+\begin{table}
+  \renewcommand{\arraystretch}{1.25}
+  \begin{tabularx}{\textwidth}{ l | l | >{\raggedright\arraybackslash}X }
+    Changes & Identifier & Rationale/Hypothesis \\
+    \hline
+    \(N = (304, 304)\) &
+    \texttt{lsnn-layered} &
+    Two-layer configuration with the same number of trainable weights. \\
+    \hline
+    \(
+    \begin{aligned}[t]
+      B &= 32 \\
+      t_\mathrm{in} &= 20 \\
+      \tau_\alpha &= 2000.0 \\
+      f_\mathrm{in} &= 250 \\
+    \end{aligned}
+    \) &
+    \texttt{lsnn-longinput} &
+    Longer input presentation period with a reduced input spike rate. Batch size
+    and adaptation time constant were adjusted to compensate. \\
+    \hline
+    \(f_\mathrm{reg} = 10\) &
+    \texttt{lsnn-quiet} &
+    Testing the effect of a lower target firing rate. \\
+    \hline
+    \(\tau_\alpha = 250.0\) &
+    \texttt{lsnn-forgetful} &
+    A shorter adaptation time constant should reduce ability to capture
+    long-term dependencies. \\
+    \hline
+    \(\alpha = 0.2\) &
+    \texttt{lsnn-rigid} &
+    Testing the effect of a steeper adaptation curve. \\
+    \hline
+    \(n_\alpha = 0.8\) &
+    \texttt{lsnn-alif} &
+    A model with more adaptive neurons might learn better. \\
+    \hline
+    \(n_\alpha = 0.0\) &
+    \texttt{lif} &
+    A model without adaptive neurons should perform considerably worse. \\
+  \end{tabularx}
+  \caption{Experimental LSNN configurations}
+  \label{tab:lsnn-experiments}
+\end{table}
 
 \end{document}
