@@ -156,7 +156,13 @@ The components described in the sections above can be used to build a module
 whose interface is identical to that of an LSTM. This enables a seamless
 transition to the LSNN-based variant of Basic RNN.
 
-\todo{Linear layer and reasoning}
+It is worth noting that the output of the LSNN is fed into a fully connected
+layer. This approach is common in previous work \cite{Bellec2018LSNN,
+Bellec2020}. Some may argue that this is a departure from biological realism,
+but it is arguably just a convenient method of mapping the internal spikes to an
+output vector of desired size. Most importantly, the activation function in this
+final layer is linear, meaning that the task of learning non-linearities in
+input data is delegated solely to the LSNN.
 
 \missingfigure{Cell diagram}
 
