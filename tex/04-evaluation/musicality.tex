@@ -1,0 +1,44 @@
+\documentclass[../../report.tex]{subfiles}
+\begin{document}
+\section{Musicality}
+
+The previous sections evaluated the model's performance in terms of objective
+but crude statistical metrics. For a generative model, good accuracy values are
+not necessarily an indicator of perceptually satisfying results, so it is a good
+idea to perform a manual reality check.
+
+Objective evaluation of a work of music is arguably impossible. Its individual
+qualities can be described, but it is up to the listener to decide whether those
+qualities are pleasant or bothersome. That being said, there are a few very
+general features of music that are thought to be universal, such as tonality,
+and a tendency towards smaller melodic intervals \cite{Mehr2019}.
+
+\subsection{The bad}
+
+The glaring issue with the model is its inability to stick to a consistent theme
+throughout a melody. This is a known problem that is inherent in the simplistic
+architecture of the Basic RNN model \cite{Abolafia2016}.
+\missingfigure{Lost motif}
+
+\subsection{The good}
+
+If we allow ourselves to ignore the lack of long-term structure and instead
+focus on simpler features, we find that the model has actually learned a thing
+or two.
+
+\subsubsection{Tonality}
+Most of the time, the model is able to stay in key.
+\missingfigure{Tonality}
+
+\subsubsection{Register consistency}
+If the primer melody consists of notes purely in the upper or lower register,
+the generated melody will tend to stay in the same register.
+\missingfigure{High and low primers}
+
+\subsubsection{Note density}
+The model seems to pay attention to note duration in the primer melody. When
+primed with many short notes, the generated melody is more energetic, while
+priming with long notes results in a calmer melody.
+\missingfigure{Slow and fast primers}
+
+\end{document}
