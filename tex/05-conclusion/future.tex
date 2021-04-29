@@ -1,0 +1,39 @@
+\documentclass[../../report.tex]{subfiles}
+\begin{document}
+\section{Future Work}
+
+Spiking neural networks and music generation are both complex problem domains on
+their own, and their combination is even more so. By the end of this project, it
+had become clear that there is still much to be explored at the intersection of
+these two active research fields. In this concluding section of the report, we
+shall outline some ideas that could seed future works.
+
+\subsection{Neuromorphic implementation}
+
+During training, it was observed that the LSNN is around an order of magnitude
+slower. Potentially, an efficiency improvement could be achieved through the use
+of neuromorphic hardware. This approach comes with its own set of challenges,
+such as limited synaptic connectivity or limited memory \cite{Liu2018}.
+Fortunately, it has been shown that enforcing sparse connectivity only leads to
+a minor loss in accuracy on several standard benchmarks
+\cite{Bellec2018Rewiring}. This, along with results achieved by the e-prop
+online learning algorithm \cite{Bellec2020}, gives hope that our melody
+generation model could also be implemented on neuromorphic hardware.
+
+\subsection{Attention}
+
+Today, some of the most successful results in symbolic music generation
+\cite{Huang2018} are achieved through the use of Transformers, which rely
+exclusively on attention mechanisms \cite{Vaswani2017}. It remains to be seen
+how the concept of attention translates to the domain of biologically inspired
+neural networks, and how it could improve melody generation.
+
+\subsection{Frequency domain}
+
+In the human ear, different parts of the cochlea resonate at different
+frequencies, effectively performing a mechanical version of the Fourier
+transform. This means the human auditory system operates in the frequency
+domain, so it would be interesting to explore the possibilities of SNN music
+generation with spectral inputs.
+
+\end{document}
