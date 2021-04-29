@@ -50,7 +50,7 @@ training procedure.
 Formally, the value of a neuron's spike function \(s\) at time \(t\) is defined
 by the Heaviside step function.
 
-\begin{align}
+\begin{align*}
   s_t &= H(v_t - v_\mathrm{thr})
   \\
   H(x) &=
@@ -58,7 +58,7 @@ by the Heaviside step function.
   1 & \text{if } x \geq 0 \\
   0 & \text{if } x < 0
   \end{cases}
-\end{align}
+\end{align*}
 
 In other words, the value is 1 if the membrane voltage \(v_t\) is greater than
 or equal to firing threshold \(v_\mathrm{thr}\), and 0 otherwise. Being
@@ -67,13 +67,13 @@ Therefore, it is necessary to define a pseudo-derivative \(\frac{ds}{dv}\) that
 can be combined with the upstream loss gradient \(\frac{dL}{ds}\).
 \todo[inline]{Consider adding function graphs}
 
-\begin{align}
+\begin{align*}
   v_\mathrm{scaled} &= \frac{v}{v_\mathrm{thr}} - 1
   \\
   \frac{ds}{dv} &= \max(0, 1 - \left| v_\mathrm{scaled} \right|) \cdot \gamma
   \\
   \frac{dL}{dv} &= \frac{ds}{dv} \cdot \frac{dL}{ds}
-\end{align}
+\end{align*}
 
 The derivative is scaled by a dampening factor \(\gamma = 0.3\). This stabilises
 learning by preventing erratic loss gradients.
@@ -86,9 +86,9 @@ To prevent biologically unrealistic firing rates, deviations from the target
 firing frequency \(f_\mathrm{target}\) are penalised using an additional square
 term in the loss function.
 
-\begin{align}
+\begin{align*}
   L_\mathrm{rate} = \frac{1}{2} (f - f_\mathrm{target})^2
-\end{align}
+\end{align*}
 
 The firing rate \(f\) is calculated for each neuron individually by averaging
 the value of its spike function across all time steps in the sequence.

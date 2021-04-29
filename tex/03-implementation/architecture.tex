@@ -106,11 +106,11 @@ functionality was implemented in \texttt{SpikeSmoothingCell}, yet another
 subclass of \texttt{RNNCell}. Its \texttt{call} operation can be described by
 the following equations:
 
-\begin{align}
+\begin{align*}
   \mathrm{call}(\bm{x}_t, \bm{s}_t) &= (\bm{y}_t, \bm{s}_{t+1}) \\
   \bm{y}_t &= \bm{x}_t + \lambda\bm{s}_{t-1} \\
   \bm{s}_{t+1} &= \bm{y}_t
-\end{align}
+\end{align*}
 
 In other words, this cell uses its state \(\bm{s}\) as a decaying memory of
 spike inputs \(\bm{x}\), where the decay factor is \(\lambda \in [0, 1]\). In

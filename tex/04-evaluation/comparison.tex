@@ -12,13 +12,13 @@ make the comparison fair is by equalising the number of trainable weights
 between the two models. The functions below give the number of weights for
 LSTM, LSNN, and linear layers with \(n\) inputs and \(m\) outputs.
 
-\begin{align}
+\begin{align*}
   W_\mathrm{LSTM}(n, m) &= 4 \cdot (nm + m^2 + m)
   \\
   W_\mathrm{LSNN}(n, m) &= nm + m^2
   \\
   W_\mathrm{linear}(n, m) &= nm
-\end{align}
+\end{align*}
 
 The total number of weights in the chosen LSNN configuration is:
 
@@ -32,10 +32,10 @@ shall be modified such that the number of weights becomes as close to \(n\) as
 possible. The optimal layer size \(x\) can be determined by solving the
 following equation:
 
-\begin{align}
+\begin{align*}
   n &= W_\mathrm{LSTM}(38, x) + W_\mathrm{LSTM}(x, x) + W_\mathrm{linear}(x, 38) \\
   x &\approx 150 \\
-\end{align}
+\end{align*}
 
 Therefore, the layer sizes will be set to \((150, 150)\) for the comparison. All
 other parameters of the LSTM remain unchanged.
