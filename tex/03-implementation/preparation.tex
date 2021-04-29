@@ -13,8 +13,6 @@ The MIDI format is too verbose to be fed directly into the model. Using
 Magenta's \texttt{pipelines} package, the MIDI files are taken through several
 preprocessing stages to produce appropriately structured input data.
 
-\todo[inline]{Consider summarising processing parameters in a table}
-
 \subsubsection{Conversion}
 
 First of all, each MIDI file is converted into a \texttt{NoteSequence} protocol
@@ -79,25 +77,39 @@ to 128 steps.
 \subsubsection{Model encoding}
 
 Finally, melodies are converted into the model-specific format. For Basic RNN,
-this simply means mapping melody event labels to the corresponding one-hot
-vectors. A simplified example for a melody \(\bm{m}\) is given below.
+this simply means mapping melody event labels to their corresponding one-hot
+vectors. Let's consider the melody given in figure \ref{fig:encoding-melody}. It
+could be represented as a sequence \(\bm{m}\) and then encoded as follows:
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.75\textwidth]{encoding-melody}
+  \caption{Melody}
+  \label{fig:encoding-melody}
+\end{figure}
 
 \begin{align*}
   \bm{m} &=
   \begin{bmatrix}
-    0 & -2 & -2 & 1 & -1 & 2 & 2
+    0 & -2 & -2 & 1 & -1 & 2 & 2 & -2
   \end{bmatrix}
   \\
   \mathrm{encode}(\bm{m}) &=
   \begin{bmatrix}
-    0 & 1 & 1 & 0 & 0 & 0 & 0 \\
-    0 & 0 & 0 & 0 & 1 & 0 & 0 \\
-    1 & 0 & 0 & 0 & 0 & 0 & 0 \\
-    0 & 0 & 0 & 1 & 0 & 0 & 0 \\
-    0 & 0 & 0 & 0 & 0 & 1 & 1
+    0 & 1 & 1 & 0 & 0 & 0 & 0 & 1 \\
+    0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 \\
+    1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+    0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 \\
+    0 & 0 & 0 & 0 & 0 & 1 & 1 & 0 \\
   \end{bmatrix}
 \end{align*}
 
-\todo[inline]{Label table}
+The above encoding assumes eighth note time steps. Three possible \emph{note-on}
+events are encoded by values 0, 1 and 2. Special value \num{-2} indicates
+\emph{no-event}, i.e. continue playing previous note; \num{-1} represents a
+\emph{note-off} event.
+
+The real model uses sixteenth note time steps. Also, the one-hot vectors have 38
+entries, representing 36 \emph{note-on} events and the two special events.
 
 \end{document}
