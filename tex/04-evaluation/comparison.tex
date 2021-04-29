@@ -42,5 +42,19 @@ other parameters of the LSTM remain unchanged.
 
 \subsection{Results}
 
+Both models were trained for \num{10000} steps, while evaluating performance on
+the validation melodies every \num{1000} steps. The results show that while the
+LSNN takes the lead initially, it is soon overtaken by the LSTM. At the end of
+training, it is clear that the LSTM can achieve a better event accuracy,
+although its counterpart is not far behind. Interestingly, the LSNN achieves a
+slightly better per-class accuracy.
+
+A more pressing issue is the fact that the LSNN is an order of magnitude slower
+in training. This is not very surprising, as the LSTM consists of simple
+operations that can be massively accelerated by the GPU. On the other hand, as
+the LSNN models real biological phenomena, its step computation is considerably
+more convoluted.
+
+\missingfigure{Result graphs}
 
 \end{document}
