@@ -17,37 +17,46 @@ In TensorFlow, custom recurrent networks are defined by extending the abstract
 
 \subsubsection{Constructor arguments}
 The LSNN cell has many hyperparameters. Their optimal values depend on the task,
-so they have been made configurable via the constructor.
+so they have been made configurable via constructor arguments (table
+\ref{tab:lsnn-args}).
 
-\todo[inline]{Turn this into a table}
-\begin{itemize}
-  \item num neurons -- the number of neurons modelled by this cell
-  \item dt -- the physical time step represented by a single iteration
-  \item frac alif -- fraction of neurons with adaptive firing thresholds
-  \item num refractory dt -- length of the refractory period
-  \item spike threshold -- base firing threshold
-  \item potential decay -- membrane potential time constant\footnotemark{}
-  \item adaptation decay -- adaptive threshold time constant\footnotemark[\value{footnote}]
-  \item adaptation magnitude -- adaptive threshold scaling factor
-  \item dampening factor -- pseudo-derivative scaling factor \todo{training link}
-\end{itemize}
+\begin{table}
+  \begin{tabularx}{\textwidth}{ >{\ttfamily}l X }
+    num\string_neurons & Number of neurons modelled by this cell \\
+    dt & Physical time step per iteration \\
+    frac\string_alif & Fraction of neurons with adaptive firing thresholds \\
+    num\string_refractory\string_dt & Number of refractory time steps \\
+    spike\string_threshold & Threshold membrane potential \\
+    potential\string_decay & Membrane potential time constant\footnotemark{} \\
+    adaptation\string_decay & Adaptive threshold time
+    constant\footnotemark[\value{footnote}] \\
+    adaptation\string_magnitude & Adaptive threshold scaling factor \\
+    dampening\string_factor & Pseudo-derivative scaling factor \\
+  \end{tabularx}
+  \caption{LSNN cell constructor arguments}
+  \label{tab:lsnn-args}
+\end{table}
 
 \footnotetext{This is a physics concept beyond the scope of this report. In a
 nutshell, for a time constant \(\tau\) and a time step \(\delta t\), the decay
 factor is given by \(\exp(-\delta t / \tau)\).}
 
 \subsubsection{State}
-The state of an LSNN cell is a tuple of six vectors, as described below:
+The state of an LSNN cell is described by a 6-tuple, as detailed in table
+\ref{tab:lsnn-state}.
 
-\todo[inline]{Turn this into a table}
-\begin{itemize}
-  \item potentials -- membrane potential of each neuron
-  \item adaptations -- magnitude of threshold adaptation for each neuron
-  \item spikes -- binary vector indicating neurons that spiked in the previous step
-  \item refractoriness -- refractory period counter for each neuron
-  \item num\_spikes -- running total of spikes for each neuron
-  \item num\_steps -- running total of steps taken by this cell (scalar)
-\end{itemize}
+\begin{table}
+  \begin{tabularx}{\textwidth}{ >{\ttfamily}l X }
+    potentials & Membrane potentials of each neuron \\
+    adaptations & Neuronal adaptation level of each neuron \\
+    spikes & Spikes emitted in the previous step \\
+    refractoriness & Neurons' refractory period counters \\
+    num\string_spikes & Running total of spikes for each neuron \\
+    num\string_steps & Running total of steps taken by this cell (scalar) \\
+  \end{tabularx}
+  \caption{LSNN state tuple contents}
+  \label{tab:lsnn-state}
+\end{table}
 
 \subsubsection{Input \& output}
 
