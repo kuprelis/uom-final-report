@@ -70,8 +70,6 @@ Subclasses of \texttt{RNNCell} must implement the \texttt{call} method. It
 should take the input and state as arguments, and it should return the output
 and next state. The LSNN cell achieves this as follows:
 
-\todo[inline]{Consider turning this into pseudocode}
-\todo[inline]{Consider adding equations}
 \begin{enumerate}
 
   \item Input spikes and internal spikes are multiplied with corresponding
@@ -173,6 +171,16 @@ output vector of desired size. Most importantly, the activation function in this
 final layer is linear, meaning that the task of learning non-linearities in
 input data is delegated solely to the LSNN.
 
-\missingfigure{Cell diagram}
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{architecture}
+  \caption{Structure of the complete model. Using TensorFlow's RNN utilities,
+  one or more LSNN cells can be chained together, ultimately feeding into a
+  spike smoothing cell. The composite cell is then wrapped using the custom
+  input expander, which transforms a single input \(x_t\) into \(n\) sub-inputs.
+  Only the output from the final sub-step \(y_{t+n}\) is surfaced. Lastly, a
+  linear layer is used to produce activation values for each output class.}
+  \label{fig:architecture}
+\end{figure}
 
 \end{document}
