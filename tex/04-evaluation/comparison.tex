@@ -42,6 +42,7 @@ other parameters of the LSTM remain unchanged.
 
 \subsection{Results}
 
+The final evaluation results are presented in figure \ref{fig:final-results}.
 Both models were trained for \num{10000} steps, while evaluating performance on
 the validation melodies every \num{1000} steps. The results show that while the
 LSNN takes the lead initially, it is soon overtaken by the LSTM. At the end of
@@ -55,6 +56,65 @@ operations that can be massively accelerated by the GPU. On the other hand, as
 the LSNN models real biological phenomena, its step computation is considerably
 more convoluted.
 
-\missingfigure{Result graphs}
+\begin{figure}
+  \centering
+  \begin{tikzpicture}
+    \begin{groupplot}[
+        xlabel={Training step},
+        xmin=0,
+        xmax=11000,
+        grid=major,
+        group style = {
+          group size=1 by 3,
+          x descriptions at=edge bottom,
+          vertical sep=0pt,
+        },
+    ]
+      \nextgroupplot[ylabel={Event accuracy}]
+      \addplot table [
+        col sep=comma,
+        x=Step,
+        y=Value,
+      ]{\subfix{csv/final-event-accuracy-lsnn.csv}};
+      \addplot table [
+        col sep=comma,
+        x=Step,
+        y=Value,
+      ]{\subfix{csv/final-event-accuracy-lstm.csv}};
+
+      \nextgroupplot[
+        ylabel={Per-class accuracy},
+        legend style={at={(0.98,0.5)}, anchor=east}
+      ]
+      \legend{LSNN, LSTM}
+      \addplot table [
+        col sep=comma,
+        x=Step,
+        y=Value,
+      ]{\subfix{csv/final-per-class-lsnn.csv}};
+      \addplot table [
+        col sep=comma,
+        x=Step,
+        y=Value,
+      ]{\subfix{csv/final-per-class-lstm.csv}};
+
+      \nextgroupplot[ylabel={Time per step (s)}]
+      \addplot table [
+        col sep=comma,
+        x=Step,
+        y=Value,
+        mark=none,
+      ]{\subfix{csv/time-lsnn.csv}};
+      \addplot table [
+        col sep=comma,
+        x=Step,
+        y=Value,
+        mark=none,
+      ]{\subfix{csv/time-lstm.csv}};
+    \end{groupplot}
+  \end{tikzpicture}
+  \caption{Baseline LSTM comparison results.}
+  \label{fig:final-results}
+\end{figure}
 
 \end{document}
