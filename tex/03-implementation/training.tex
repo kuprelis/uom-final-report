@@ -23,17 +23,17 @@ activation values, one for each possible melody event. Note that the magnitude
 of these values is unbounded, therefore a probability distribution
 \(\bm{\hat{p}}\) is computed using the softmax function:
 
-\begin{equation}
+\begin{equation*}
   \hat{p}_i = \frac{ \exp(y_i) }{ \sum_{j} \exp(y_j) }
-\end{equation}
+\end{equation*}
 
 As is common in classification tasks, the accuracy of the estimated probability
 distribution \(\bm{\hat{p}}\) is quantified against the ground truth \(\bm{p}\)
 using \emph{cross-entropy} loss:
 
-\begin{equation}
+\begin{equation*}
   L(\bm{p}, \bm{\hat{p}}) = - \bm{p} \cdot \log(\bm{\hat{p}})
-\end{equation}
+\end{equation*}
 
 In fact, since \(\bm{p}\) is effectively a one-hot vector, the loss is simply
 the negated log probability of the ground truth label.
@@ -108,9 +108,9 @@ To prevent biologically unrealistic firing rates, deviations from the target
 firing frequency \(f_\mathrm{target}\) are penalised using an additional square
 term in the loss function.
 
-\begin{align*}
+\begin{equation*}
   L_\mathrm{rate} = \frac{1}{2} (f - f_\mathrm{target})^2
-\end{align*}
+\end{equation*}
 
 The firing rate \(f\) is calculated for each neuron individually by averaging
 the value of its spike function across all time steps in the sequence.
