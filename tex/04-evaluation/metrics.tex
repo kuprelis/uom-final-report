@@ -6,10 +6,39 @@ In each step, the model chooses one of 38 possible events. This means that
 random guessing would give an overall accuracy of \(\frac{1}{38} \approx 3\%\).
 However, the model is quick to learn that \emph{no-event} is by far the most
 common label in the dataset, leading to a rapid increase in \emph{no-event
-accuracy}. This can give a false impression of good performance -- in reality,
-the model still has no ability to predict notes correctly.
+accuracy} (figure \ref{fig:initial-accuracy}). This can give a false impression
+of good performance -- in reality, the model still has no ability to predict
+notes correctly.
 
-\missingfigure{Initial accuracies}
+\begin{figure}
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      xlabel={Training step},
+      ylabel={Accuracy},
+      legend entries={Overall, No event, Event},
+      legend style={at={(0.9,0.5)}},
+    ]
+      \addplot table [
+        col sep=comma,
+        x=Step,
+        y=Value,
+      ]{\subfix{csv/initial-accuracy.csv}};
+      \addplot table [
+        col sep=comma,
+        x=Step,
+        y=Value,
+      ]{\subfix{csv/initial-no-event-accuracy.csv}};
+      \addplot table [
+        col sep=comma,
+        x=Step,
+        y=Value,
+      ]{\subfix{csv/initial-event-accuracy.csv}};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Bias towards \emph{no-event} skews the overall accuracy}
+  \label{fig:initial-accuracy}
+\end{figure}
 
 In order to avoid the issue explained above, all experiments were evaluated
 according to the single metric of \emph{event accuracy}. More precisely, this is
