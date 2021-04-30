@@ -76,9 +76,32 @@ can be combined with the upstream loss gradient \(\frac{dL}{ds}\).
 \end{align*}
 
 The derivative is scaled by a dampening factor \(\gamma = 0.3\). This stabilises
-learning by preventing erratic loss gradients.
+learning by preventing erratic loss gradients (figure \ref{fig:dampening}).
 
-\missingfigure{Dampening experiment graphs}
+\begin{figure}
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      xlabel={Training step},
+      ylabel={Gradient norm},
+      legend entries={\(\gamma=0.3\), \(\gamma=0.0\)},
+      legend style={at={(0.02,0.98)}, anchor=north west},
+    ]
+      \addplot table [
+        col sep=comma,
+        x=Step,
+        y=Value,
+      ]{\subfix{gradient-dampened.csv}};
+      \addplot table [
+        col sep=comma,
+        x=Step,
+        y=Value,
+      ]{\subfix{gradient-undampened.csv}};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{The dampening factor \(\gamma\) ensures a stable gradient}
+  \label{fig:dampening}
+\end{figure}
 
 \subsubsection{Firing rate regularisation}
 
