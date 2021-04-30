@@ -36,15 +36,11 @@ MIDI files can encode music with changes in tempo or time signature. To reduce
 the complexity of data that the model has to generalise, sequences with variable
 timing are split into subsequences of constant timing.
 
-\missingfigure{Time signature change}
-
 \subsubsection{Quantisation}
 
 Basic RNN assumes that melody events are evenly spaced in time. In reality, MIDI
 events are bounded by arbitrary start and end times. Therefore, this stage of
 the pipeline aligns the MIDI events to a fixed grid.
-
-\missingfigure{Ableton quantisation}
 
 \subsubsection{Melody extraction}
 
