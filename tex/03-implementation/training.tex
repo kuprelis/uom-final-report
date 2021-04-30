@@ -65,7 +65,6 @@ or equal to firing threshold \(v_\mathrm{thr}\), and 0 otherwise. Being
 piecewise constant, the spike function is unsuitable for backpropagation.
 Therefore, it is necessary to define a pseudo-derivative \(\frac{ds}{dv}\) that
 can be combined with the upstream loss gradient \(\frac{dL}{ds}\).
-\todo[inline]{Consider adding function graphs}
 
 \begin{align*}
   v_\mathrm{scaled} &= \frac{v}{v_\mathrm{thr}} - 1
