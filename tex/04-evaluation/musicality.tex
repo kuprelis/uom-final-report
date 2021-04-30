@@ -18,7 +18,12 @@ and a tendency towards smaller melodic intervals \cite{Mehr2019}.
 The glaring issue with the model is its inability to stick to a consistent theme
 throughout a melody. This is a known problem that is inherent in the simplistic
 architecture of the Basic RNN model \cite{Abolafia2016}.
-\missingfigure{Lost motif}
+
+\begin{figure}[h]
+  \includegraphics[width=\textwidth]{gen-got}
+  \caption{When given one bar of the \emph{Game of Thrones} theme, the model
+  seems to forget the pattern immediately.}
+\end{figure}
 
 \subsection{The good}
 
@@ -27,18 +32,48 @@ focus on simpler features, we find that the model has actually learned a thing
 or two.
 
 \subsubsection{Tonality}
-Most of the time, the model is able to stay in key.
-\missingfigure{Tonality}
+The model seems to have understood the concept of tonality. Most of the time, it
+is able to stay in key.
+
+\begin{figure}[h]
+  \includegraphics[width=\textwidth]{gen-amaj}
+  \caption{When primed with an ascending A major scale, the model manages to
+  continue playing in key throughout the whole sequence.}
+\end{figure}
 
 \subsubsection{Register consistency}
 If the primer melody consists of notes purely in the upper or lower register,
 the generated melody will tend to stay in the same register.
-\missingfigure{High and low primers}
+
+\begin{figure}[h]
+  \begin{subfigure}[b]{\textwidth}
+    \includegraphics[width=\textwidth]{gen-high}
+    \caption{Upper}
+    \vspace{1mm}
+  \end{subfigure}
+  \begin{subfigure}[b]{\textwidth}
+    \includegraphics[width=\textwidth]{gen-low}
+    \caption{Lower}
+  \end{subfigure}
+  \caption{Priming with sequences in different registers.}
+\end{figure}
 
 \subsubsection{Note density}
 The model seems to pay attention to note duration in the primer melody. When
 primed with many short notes, the generated melody is more energetic, while
 priming with long notes results in a calmer melody.
-\missingfigure{Slow and fast primers}
+
+\begin{figure}[h]
+  \begin{subfigure}[b]{\textwidth}
+    \includegraphics[width=\textwidth]{gen-fast}
+    \caption{Sixteenth notes}
+    \vspace{1mm}
+  \end{subfigure}
+  \begin{subfigure}[b]{\textwidth}
+    \includegraphics[width=\textwidth]{gen-slow}
+    \caption{Half notes}
+  \end{subfigure}
+  \caption{Priming with sequences of different note duration.}
+\end{figure}
 
 \end{document}
