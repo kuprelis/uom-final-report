@@ -90,12 +90,12 @@ learning by preventing erratic loss gradients (figure \ref{fig:dampening}).
         col sep=comma,
         x=Step,
         y=Value,
-      ]{\subfix{gradient-dampened.csv}};
+      ]{\subfix{csv/gradient-dampened.csv}};
       \addplot table [
         col sep=comma,
         x=Step,
         y=Value,
-      ]{\subfix{gradient-undampened.csv}};
+      ]{\subfix{csv/gradient-undampened.csv}};
     \end{axis}
   \end{tikzpicture}
   \caption{The dampening factor \(\gamma\) ensures a stable gradient}
