@@ -111,10 +111,76 @@ perturbing individual parameters in isolation (table
 \subsection{Results}
 
 All experimental configurations were trained for \num{3000} steps. To maximise
-training speed, testing on the evaluation dataset was only performed every
+training speed, testing on the validation dataset was only performed every
 \num{1000} steps. Finally, the configuration with the highest event prediction
-accuracy was chosen, which turned out to be \texttt{lsnn-rigid}.
+accuracy was chosen, which turned out to be \texttt{lsnn-rigid}. For the
+complete set of results, see figure \ref{fig:lsnn-eval}.
 
-\missingfigure{Plots}
+\begin{figure}
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      xlabel={Training step},
+      ylabel={Event accuracy},
+      legend style={
+        cells={anchor=west},
+        legend pos=outer north east,
+      }
+    ]
+      \legend{
+        \texttt{lsnn-base},
+        \texttt{lsnn-layered},
+        \texttt{lsnn-longinput},
+        \texttt{lsnn-quiet},
+        \texttt{lsnn-forgetful},
+        \texttt{lsnn-rigid},
+        \texttt{lsnn-alif},
+        \texttt{lsnn-lif},
+      }
+      \addplot table [
+        col sep=comma,
+        x=Step,
+        y=Value,
+      ]{\subfix{csv/eval-base.csv}};
+      \addplot table [
+        col sep=comma,
+        x=Step,
+        y=Value,
+      ]{\subfix{csv/eval-layered.csv}};
+      \addplot table [
+        col sep=comma,
+        x=Step,
+        y=Value,
+      ]{\subfix{csv/eval-longinput.csv}};
+      \addplot table [
+        col sep=comma,
+        x=Step,
+        y=Value,
+      ]{\subfix{csv/eval-quiet.csv}};
+      \addplot table [
+        col sep=comma,
+        x=Step,
+        y=Value,
+      ]{\subfix{csv/eval-forgetful.csv}};
+      \addplot table [
+        col sep=comma,
+        x=Step,
+        y=Value,
+      ]{\subfix{csv/eval-rigid.csv}};
+      \addplot table [
+        col sep=comma,
+        x=Step,
+        y=Value,
+      ]{\subfix{csv/eval-alif.csv}};
+      \addplot table [
+        col sep=comma,
+        x=Step,
+        y=Value,
+      ]{\subfix{csv/eval-lif.csv}};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Experimental configurations' accuracy on the validation set}
+  \label{fig:lsnn-eval}
+\end{figure}
 
 \end{document}
