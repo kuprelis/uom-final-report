@@ -36,16 +36,17 @@ neuromorphic hardware, like our department's own SpiNNaker supercomputer
 than an ML framework, so for the time being, efficient SNNs remain reserved for
 those willing to take a deep dive. Given that efficiency was not a concern in
 this project, all simulations were performed using GPU-accelerated SNN
-implementations on general purpose computers.
+implementations on a general purpose computer.
 
-Let's now turn back to our goal of music generation. If we are to use neural
+Let's now turn back to our goal of melody generation. If we are to use neural
 networks to generate melodies, we must ensure that the network has the
 capability to capture complex melodic patterns, or more generally, long-term
 sequential dependencies. This is exactly the promise of an LSTM, and that is why
-it has been so popular for the task of music generation. It has been shown that
-SNNs can acquire similar properties through the inclusion of neuronal adaptation
+it has been so popular in this domain. It has been shown that SNNs can acquire
+similar properties through the inclusion of neuronal adaptation
 \cite{Bellec2018LSNN}. Such spiking networks have been named LSNNs, due to their
-similarity to LSTMs. This similarity also gives hope to solve the task of
-sequence modelling, and so that is the hypothesis to be tested in this project.
+similarity to LSTMs. This similarity suggests that melody generation with
+spiking networks is possible, and so that is the hypothesis to be tested in this
+project.
 
 \end{document}
